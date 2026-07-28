@@ -1,0 +1,238 @@
+{
+  "version": 10,
+  "$comment": "ebnfparser cmake presets",
+  "configurePresets": [
+    {
+      "name": "linux-gcc-release",
+      "$comment": "Linux GCC release build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-gcc-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++-16",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc-16"
+      }
+    },
+    {
+      "name": "linux-gcc-debug",
+      "$comment": "Linux GCC debug build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-gcc-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++-16",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc-16"
+      }
+    },
+    {
+      "name": "linux-clang-debug",
+      "$comment": "Linux Clang debug build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-clang-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang-22",
+        "CMAKE_CXX_COMPILER": "clang++-22",
+        "CMAKE_EXE_LINKER_FLAGS_INIT": "-fuse-ld=lld"
+      }
+    },
+    {
+      "name": "linux-clang-release",
+      "$comment": "Linux Clang release build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-clang-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang-22",
+        "CMAKE_CXX_COMPILER": "clang++-22",
+        "CMAKE_EXE_LINKER_FLAGS_INIT": "-fuse-ld=lld"
+      }
+    },
+    {
+      "name": "windows-release",
+      "$comment": "Windows VC++ release build",
+      "generator": "Visual Studio 18 2026",
+      "binaryDir": "${sourceDir}/build/windows-release",
+      "cacheVariables": {
+      }
+    },
+    {
+      "name": "windows-debug",
+      "$comment": "Windows VC++ debug build",
+      "generator": "Visual Studio 18 2026",
+      "binaryDir": "${sourceDir}/build/windows-debug",
+      "cacheVariables": {
+        "gtest_force_shared_crt": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      }
+    },
+    {
+      "name": "cygwin-release",
+      "$comment": "Cygwin GCC release build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/cygwin-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc"
+      }
+    },
+    {
+      "name": "cygwin-debug",
+      "$comment": "Cygwin GCC debug build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/cygwin-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc"
+      }
+    },
+    {
+      "name": "mac-release",
+      "$comment": "Mac Clang release build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mac-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BISON_EXECUTABLE": "$env{BISON_ROOT}/bin/bison",
+        "FLEX_EXECUTABLE": "$env{FLEX_ROOT}/bin/flex"
+      }
+    },
+    {
+      "name": "mac-debug",
+      "$comment": "Mac Clang debug build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mac-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BISON_EXECUTABLE": "$env{BISON_ROOT}/bin/bison",
+        "FLEX_EXECUTABLE": "$env{FLEX_ROOT}/bin/flex"
+      }
+    },
+    {
+      "name": "linux-wasm-debug",
+      "$comment": "Webassembly debug build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-wasm-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_EXTENSIONS": "OFF"
+      }
+    },
+    {
+      "name": "linux-wasm-release",
+      "$comment": "Webassembly release build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-wasm-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_EXTENSIONS": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-gcc-release",
+      "configurePreset": "linux-gcc-release"
+    },
+    {
+      "name": "linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug"
+    },
+    {
+      "name": "linux-clang-release",
+      "configurePreset": "linux-clang-release"
+    },
+    {
+      "name": "linux-clang-debug",
+      "configurePreset": "linux-clang-debug"
+    },
+    {
+      "name": "windows-release",
+      "configurePreset": "windows-release"
+    },
+    {
+      "name": "windows-debug",
+      "configurePreset": "windows-debug"
+    },
+    {
+      "name": "cygwin-release",
+      "configurePreset": "cygwin-release"
+    },
+    {
+      "name": "cygwin-debug",
+      "configurePreset": "cygwin-debug"
+    },
+    {
+      "name": "mac-release",
+      "configurePreset": "mac-release"
+    },
+    {
+      "name": "mac-debug",
+      "configurePreset": "mac-debug"
+    },
+    {
+      "name": "linux-wasm-debug",
+      "configurePreset": "linux-wasm-debug"
+    },
+    {
+      "name": "linux-wasm-release",
+      "configurePreset": "linux-wasm-release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-gcc-release",
+      "configurePreset": "linux-gcc-release"
+    },
+    {
+      "name": "linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug"
+    },
+    {
+      "name": "linux-clang-release",
+      "configurePreset": "linux-clang-release"
+    },
+    {
+      "name": "linux-clang-debug",
+      "configurePreset": "linux-clang-debug"
+    },
+    {
+      "name": "windows-release",
+      "configurePreset": "windows-release",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-debug",
+      "configurePreset": "windows-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "cygwin-release",
+      "configurePreset": "cygwin-release"
+    },
+    {
+      "name": "cygwin-debug",
+      "configurePreset": "cygwin-debug"
+    },
+    {
+      "name": "mac-release",
+      "configurePreset": "mac-release"
+    },
+    {
+      "name": "mac-debug",
+      "configurePreset": "mac-debug"
+    },
+    {
+      "name": "linux-wasm-debug",
+      "configurePreset": "linux-wasm-debug"
+    },
+    {
+      "name": "linux-wasm-release",
+      "configurePreset": "linux-wasm-release"
+    }
+  ]
+}
