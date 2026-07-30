@@ -1,8 +1,8 @@
-# simple_calc/CMakeLists.txt
+# calc/CMakeLists.txt
 
 cmake_minimum_required(VERSION 4.2)
 
-project(calc_minimal)
+project(calc)
 
 include(FetchContent)
 
@@ -16,5 +16,6 @@ FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(thirdparty)
 add_subdirectory(simple_calc)
+add_subdirectory(ast_calc)
 
 enable_testing()

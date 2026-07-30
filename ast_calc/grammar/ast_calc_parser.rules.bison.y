@@ -1,7 +1,7 @@
-// simple_calc_parser.rules.bison.y
+// ast_calc_parser.rules.bison.y
 
 // calc grammar without clutter of semantic actions
-// bison -Wall -Wdangling-alias -Werror --color=always -Wcounterexamples --report counterexamples,lookaheads,solved --report-file bisonreport.txt simple_calc_parser.rules.bison.y
+// bison -Wall -Wdangling-alias -Werror --color=always -Wcounterexamples --report counterexamples,lookaheads,solved --report-file bisonreport.txt ast_calc_parser.rules.bison.y
 
 %token DIV                  "/"
 %token EQUAL                "="
@@ -12,8 +12,8 @@
 %token SEMICOLON            ";"
 %token TIMES                "*"
 
-%token                      IDENT
 %token                      INT
+%token                      IDENT
 
 %start expr
 
