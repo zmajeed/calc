@@ -19,7 +19,6 @@ target_compile_options(getopt.gtest PRIVATE
 
 target_link_libraries(getopt.gtest getoptlib gmock_main)
 
-enable_testing()
 include(GoogleTest)
 gtest_discover_tests(getopt.gtest DISCOVERY_MODE PRE_TEST EXTRA_ARGS --gtest_color=yes)
 

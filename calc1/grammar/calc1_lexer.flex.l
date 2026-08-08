@@ -1,4 +1,4 @@
-/* simple_calc_lexer.flex.l */
+/* calc1_lexer.flex.l */
 
 /*
 MIT License
@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/* flex -Cfe -o simple_calc_lexer.flex.cpp simple_calc_lexer.flex.l */
-/* g++ -O0 -Wall -Wextra -Werror -std=c++2b -o simple_calc_lexer simple_calc_lexer.flex.cpp */
+/* flex -Cfe -o calc1_lexer.flex.cpp calc1_lexer.flex.l */
+/* g++ -O0 -Wall -Wextra -Werror -std=c++2b -o calc1_lexer calc1_lexer.flex.cpp */
 
  // flex directives
 
@@ -39,10 +39,10 @@ SOFTWARE.
 %option c++
 
  // custom C++ lexer classname
-%option yyclass="Lexer"
+%option yyclass="Calc1Lexer"
 
- // custom prefix to turn yyFlexLexer into SimpleCalcFlexLexer
-%option prefix="SimpleCalc"
+ // custom prefix to turn yyFlexLexer into Calc1FlexLexer
+%option prefix="Calc1"
 
 %option debug
 
@@ -60,8 +60,7 @@ SOFTWARE.
 
  // flex start conditions ie states
  // INITIAL 0 is default start condition
- // start conditions do not appear here in generated .cpp file
- // instead they turn into macros defined inside ylex()
+ // start conditions appear as macros defined inside ylex()
 
 %top{
 // top of generated .cpp file
@@ -85,13 +84,11 @@ SOFTWARE.
 
 %{
 // bison generated header with C++ namespace and token definitions
-#include "simple_calc_parser.bison.h"
-#include "lexer/simple_calc_lexer.h"
+#include "calc1_parser.bison.h"
+#include "lexer/calc1_lexer.h"
 
 #undef YY_DECL
-// dummy parameter because yyFlexLexer::yylex(void) in static flex C++ header yyFlexLexer.h cannot be overridden, only overloaded
-// parameter has no name to avoid unused parameter warning
-#define YY_DECL simplecalc::SimpleCalcParser::symbol_type simplecalc::Lexer::yylex(LexParam& param)
+#define YY_DECL calc1::Calc1Parser::symbol_type calc1::Calc1Lexer::yylex(LexParam& param)
 
 // fix flex error could not convert 0 from int to symbol_type for #define YY_NULL 0
 // caused by turning on bison %locations because symbol_type no longer has single int constructor for implicit conversion
@@ -99,10 +96,10 @@ SOFTWARE.
 
 using namespace std;
 
-using namespace simplecalc;
+using namespace calc1;
 
 // needed for custom yyterminate
-using symbol_type = SimpleCalcParser::symbol_type;
+using symbol_type = Calc1Parser::symbol_type;
 
 // flex start conditions appear as macros in .cpp file here
 
@@ -132,55 +129,55 @@ using symbol_type = SimpleCalcParser::symbol_type;
 #endif
   {
     println("malformed number {}", yytext);
-    return SimpleCalcParser::make_YYUNDEF(loc);
+    return Calc1Parser::make_YYUNDEF(loc);
   }
-  return SimpleCalcParser::make_INT(val, loc);
+  return Calc1Parser::make_INT(val, loc);
 }
 
  /* assumes typical identifier syntax */
 [A-Za-z_][A-Za-z0-9_]* {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_IDENT(yytext, loc);
+  return Calc1Parser::make_IDENT(yytext, loc);
 }
 
 "/" {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_DIV(loc);
+  return Calc1Parser::make_DIV(loc);
 }
 
 = {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_EQUAL(loc);
+  return Calc1Parser::make_EQUAL(loc);
 }
 
 "(" {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_LEFT_PAREN(loc);
+  return Calc1Parser::make_LEFT_PAREN(loc);
 }
 
 - {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_MINUS(loc);
+  return Calc1Parser::make_MINUS(loc);
 }
 
 "+" {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_PLUS(loc);
+  return Calc1Parser::make_PLUS(loc);
 }
 
 ")" {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_RIGHT_PAREN(loc);
+  return Calc1Parser::make_RIGHT_PAREN(loc);
 }
 
 ; {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_SEMICOLON(loc);
+  return Calc1Parser::make_SEMICOLON(loc);
 }
 
 "*" {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_TIMES(loc);
+  return Calc1Parser::make_TIMES(loc);
 }
 
  /* match newlines separately to correctly update line numbers */
@@ -196,7 +193,7 @@ using symbol_type = SimpleCalcParser::symbol_type;
  /* all input must be consumed in every state */
 . {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_YYUNDEF(loc);
+  return Calc1Parser::make_YYUNDEF(loc);
 }
 
 %%

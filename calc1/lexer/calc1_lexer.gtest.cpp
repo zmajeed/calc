@@ -1,4 +1,4 @@
-// simple_calc_lexer.gtest.cpp
+// calc1_lexer.gtest.cpp
 
 /*
 MIT License
@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "simple_calc_lexer.h"
-#include "simple_calc_parser.bison.h"
+#include "calc1_lexer.h"
+#include "calc1_parser.bison.h"
 
 #include <sstream>
 #include <string>
@@ -36,138 +36,138 @@ SOFTWARE.
 using namespace std;
 using namespace ::testing;
 
-namespace simplecalc::testing {
+namespace calc1::testing {
 
-TEST(Lexer, test_0000) {
+TEST(Calc1Lexer, test_0000) {
 
   stringstream s("5");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   LexParam lexParam{};
 
   auto token = lexer.yylex(lexParam);
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), 5);
 }
 
-TEST(Lexer, test_0001) {
+TEST(Calc1Lexer, test_0001) {
 
   stringstream s("x");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   LexParam lexParam{};
 
   auto token = lexer.yylex(lexParam);
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_IDENT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_IDENT);
   EXPECT_EQ(token.value.as<string>(), "x");
 }
 
-TEST(Lexer, test_0002) {
+TEST(Calc1Lexer, test_0002) {
 
   stringstream s("2 + 3");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   LexParam lexParam{};
 
   auto token = lexer.yylex(lexParam);
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), 2);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_PLUS);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_PLUS);
 
   destroy_at(&token);
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), 3);
 
 }
 
-TEST(Lexer, test_0003) {
+TEST(Calc1Lexer, test_0003) {
 
   stringstream s("2 + -3");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   LexParam lexParam{};
 
   auto token = lexer.yylex(lexParam);
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), 2);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_PLUS);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_PLUS);
 
   destroy_at(&token);
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), -3);
 
 }
 
-TEST(Lexer, test_0004) {
+TEST(Calc1Lexer, test_0004) {
 
   stringstream s("val1 = 2; val2 = -val1+val3");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   LexParam lexParam{};
 
   auto token = lexer.yylex(lexParam);
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_IDENT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_IDENT);
   EXPECT_EQ(token.value.as<string>(), "val1");
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_EQUAL);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_EQUAL);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_INT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_INT);
   EXPECT_EQ(token.value.as<int64_t>(), 2);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_SEMICOLON);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_SEMICOLON);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_IDENT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_IDENT);
   EXPECT_EQ(token.value.as<string>(), "val2");
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_EQUAL);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_EQUAL);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_MINUS);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_MINUS);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_IDENT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_IDENT);
   EXPECT_EQ(token.value.as<string>(), "val1");
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_PLUS);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_PLUS);
 
   token.clear();
   construct_at(&token, lexer.yylex(lexParam));
 
-  ASSERT_EQ(token.kind(), SimpleCalcParser::symbol_kind::S_IDENT);
+  ASSERT_EQ(token.kind(), Calc1Parser::symbol_kind::S_IDENT);
   EXPECT_EQ(token.value.as<string>(), "val3");
 
 }

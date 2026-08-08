@@ -32,8 +32,8 @@
 
 
 /**
- ** \file ./simple_calc/flexbison.gen/simple_calc_parser.bison.h
- ** Define the simplecalc::parser class.
+ ** \file ./calc1/flexbison.gen/calc1_parser.bison.h
+ ** Define the calc1::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -42,10 +42,10 @@
 // especially those whose name start with YY_ or yy_.  They are
 // private implementation details that can be changed or removed.
 
-#ifndef YY_YY_SIMPLE_CALC_PARSER_BISON_H_INCLUDED
-# define YY_YY_SIMPLE_CALC_PARSER_BISON_H_INCLUDED
+#ifndef YY_YY_CALC1_PARSER_BISON_H_INCLUDED
+# define YY_YY_CALC1_PARSER_BISON_H_INCLUDED
 // "%code requires" blocks.
-#line 60 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 61 "./calc1/grammar/calc1_parser.bison.y"
 
 // %code requires codeblock goes at top of .h outside of namespace and parser class
 // standard c++ #includes and defines
@@ -79,11 +79,11 @@ SOFTWARE.
 #include <string>
 #include <vector>
 #include <functional>
-#include <chrono>
 #include <unordered_map>
 #include <print>
+#include <sstream>
 
-#include "locations.bison.h"
+#include "calc1_locations.bison.h"
 
 #ifdef _MSC_VER
 // disable vc++ warning C4065, switch statement contains default but no case labels in code generated for basic_symbol::clear() in .h file
@@ -91,19 +91,12 @@ SOFTWARE.
 #pragma warning(disable: 4065)
 #endif
 
-namespace simplecalc {
-
+namespace calc1 {
 using namespace std;
-using namespace chrono;
 
 struct BisonParam {
   int64_t expr = -1;
   unordered_map<string, int64_t> symtab;
-  struct Stats {
-    time_point<steady_clock> parseStartTime;
-    time_point<steady_clock> parseEndTime;
-    duration<double> parseTimeSec;
-  } stats{};
 };
 
 // info for lexer to use in yylex
@@ -116,8 +109,8 @@ struct LexParam {
 
 // println formatter for location object
 template<>
-struct std::formatter<simplecalc::location> {
-  std::format_context::iterator format(const simplecalc::location& loc, std::format_context& ctx) const {
+struct std::formatter<calc1::location> {
+  std::format_context::iterator format(const calc1::location& loc, std::format_context& ctx) const {
     std::ostringstream os;
     os << loc;
     return std::format_to(ctx.out(), "{}", os.str());
@@ -129,7 +122,7 @@ struct std::formatter<simplecalc::location> {
 };
 
 
-#line 133 "./simple_calc/flexbison.gen/simple_calc_parser.bison.h"
+#line 126 "./calc1/flexbison.gen/calc1_parser.bison.h"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -174,7 +167,7 @@ struct std::formatter<simplecalc::location> {
 #else
 # define YY_CONSTEXPR
 #endif
-# include "locations.bison.h"
+# include "calc1_locations.bison.h"
 #include <typeinfo>
 #ifndef YY_ASSERT
 # include <cassert>
@@ -268,15 +261,15 @@ struct std::formatter<simplecalc::location> {
 # define YYDEBUG 1
 #endif
 
-#line 145 "./simple_calc/grammar/simple_calc_parser.bison.y"
-namespace simplecalc {
-#line 274 "./simple_calc/flexbison.gen/simple_calc_parser.bison.h"
+#line 139 "./calc1/grammar/calc1_parser.bison.y"
+namespace calc1 {
+#line 267 "./calc1/flexbison.gen/calc1_parser.bison.h"
 
 
 
 
   /// A Bison parser.
-  class SimpleCalcParser
+  class Calc1Parser
   {
   public:
 #ifdef YYSTYPE
@@ -601,8 +594,7 @@ namespace simplecalc {
         S_add_expr = 17,                         // add_expr
         S_term = 18,                             // term
         S_factor = 19,                           // factor
-        S_atom = 20,                             // atom
-        S_postprocess = 21                       // postprocess
+        S_atom = 20                              // atom
       };
     };
 
@@ -754,7 +746,7 @@ switch (yykind)
       /// The user-facing name of this symbol.
       const char *name () const YY_NOEXCEPT
       {
-        return SimpleCalcParser::symbol_name (this->kind ());
+        return Calc1Parser::symbol_name (this->kind ());
       }
 
       /// Backward compatibility (Bison 3.6).
@@ -872,14 +864,14 @@ switch (yykind)
     };
 
     /// Build a parser object.
-    SimpleCalcParser (function<SimpleCalcParser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg);
-    virtual ~SimpleCalcParser ();
+    Calc1Parser (function<Calc1Parser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg);
+    virtual ~Calc1Parser ();
 
 #if 201103L <= YY_CPLUSPLUS
     /// Non copyable.
-    SimpleCalcParser (const SimpleCalcParser&) = delete;
+    Calc1Parser (const Calc1Parser&) = delete;
     /// Non copyable.
-    SimpleCalcParser& operator= (const SimpleCalcParser&) = delete;
+    Calc1Parser& operator= (const Calc1Parser&) = delete;
 #endif
 
     /// Parse.  An alias for parse ().
@@ -1117,7 +1109,7 @@ switch (yykind)
     class context
     {
     public:
-      context (const SimpleCalcParser& yyparser, const symbol_type& yyla);
+      context (const Calc1Parser& yyparser, const symbol_type& yyla);
       const symbol_type& lookahead () const YY_NOEXCEPT { return yyla_; }
       symbol_kind_type token () const YY_NOEXCEPT { return yyla_.kind (); }
       const location_type& location () const YY_NOEXCEPT { return yyla_.location; }
@@ -1128,16 +1120,16 @@ switch (yykind)
       int expected_tokens (symbol_kind_type yyarg[], int yyargn) const;
 
     private:
-      const SimpleCalcParser& yyparser_;
+      const Calc1Parser& yyparser_;
       const symbol_type& yyla_;
     };
 
   private:
 #if YY_CPLUSPLUS < 201103L
     /// Non copyable.
-    SimpleCalcParser (const SimpleCalcParser&);
+    Calc1Parser (const Calc1Parser&);
     /// Non copyable.
-    SimpleCalcParser& operator= (const SimpleCalcParser&);
+    Calc1Parser& operator= (const Calc1Parser&);
 #endif
 
 
@@ -1437,29 +1429,29 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 30,     ///< Last index in yytable_.
-      yynnts_ = 9,  ///< Number of nonterminal symbols.
+      yylast_ = 29,     ///< Last index in yytable_.
+      yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 18 ///< Termination state number.
     };
 
 
     // User arguments.
-    function<SimpleCalcParser::symbol_type(LexParam&)> yylex;
+    function<Calc1Parser::symbol_type(LexParam&)> yylex;
     BisonParam& bisonParam;
     LexParam& lexParam;
 
   };
 
   inline
-  SimpleCalcParser::symbol_kind_type
-  SimpleCalcParser::yytranslate_ (int t) YY_NOEXCEPT
+  Calc1Parser::symbol_kind_type
+  Calc1Parser::yytranslate_ (int t) YY_NOEXCEPT
   {
     return static_cast<symbol_kind_type> (t);
   }
 
   // basic_symbol.
   template <typename Base>
-  SimpleCalcParser::basic_symbol<Base>::basic_symbol (const basic_symbol& that)
+  Calc1Parser::basic_symbol<Base>::basic_symbol (const basic_symbol& that)
     : Base (that)
     , value ()
     , location (that.location)
@@ -1491,8 +1483,8 @@ switch (yykind)
 
 
   template <typename Base>
-  SimpleCalcParser::symbol_kind_type
-  SimpleCalcParser::basic_symbol<Base>::type_get () const YY_NOEXCEPT
+  Calc1Parser::symbol_kind_type
+  Calc1Parser::basic_symbol<Base>::type_get () const YY_NOEXCEPT
   {
     return this->kind ();
   }
@@ -1500,14 +1492,14 @@ switch (yykind)
 
   template <typename Base>
   bool
-  SimpleCalcParser::basic_symbol<Base>::empty () const YY_NOEXCEPT
+  Calc1Parser::basic_symbol<Base>::empty () const YY_NOEXCEPT
   {
     return this->kind () == symbol_kind::S_YYEMPTY;
   }
 
   template <typename Base>
   void
-  SimpleCalcParser::basic_symbol<Base>::move (basic_symbol& s)
+  Calc1Parser::basic_symbol<Base>::move (basic_symbol& s)
   {
     super_type::move (s);
     switch (this->kind ())
@@ -1536,13 +1528,13 @@ switch (yykind)
 
   // by_kind.
   inline
-  SimpleCalcParser::by_kind::by_kind () YY_NOEXCEPT
+  Calc1Parser::by_kind::by_kind () YY_NOEXCEPT
     : kind_ (symbol_kind::S_YYEMPTY)
   {}
 
 #if 201103L <= YY_CPLUSPLUS
   inline
-  SimpleCalcParser::by_kind::by_kind (by_kind&& that) YY_NOEXCEPT
+  Calc1Parser::by_kind::by_kind (by_kind&& that) YY_NOEXCEPT
     : kind_ (that.kind_)
   {
     that.clear ();
@@ -1550,12 +1542,12 @@ switch (yykind)
 #endif
 
   inline
-  SimpleCalcParser::by_kind::by_kind (const by_kind& that) YY_NOEXCEPT
+  Calc1Parser::by_kind::by_kind (const by_kind& that) YY_NOEXCEPT
     : kind_ (that.kind_)
   {}
 
   inline
-  SimpleCalcParser::by_kind::by_kind (token_kind_type t) YY_NOEXCEPT
+  Calc1Parser::by_kind::by_kind (token_kind_type t) YY_NOEXCEPT
     : kind_ (yytranslate_ (t))
   {}
 
@@ -1563,60 +1555,53 @@ switch (yykind)
 
   inline
   void
-  SimpleCalcParser::by_kind::clear () YY_NOEXCEPT
+  Calc1Parser::by_kind::clear () YY_NOEXCEPT
   {
     kind_ = symbol_kind::S_YYEMPTY;
   }
 
   inline
   void
-  SimpleCalcParser::by_kind::move (by_kind& that)
+  Calc1Parser::by_kind::move (by_kind& that)
   {
     kind_ = that.kind_;
     that.clear ();
   }
 
   inline
-  SimpleCalcParser::symbol_kind_type
-  SimpleCalcParser::by_kind::kind () const YY_NOEXCEPT
+  Calc1Parser::symbol_kind_type
+  Calc1Parser::by_kind::kind () const YY_NOEXCEPT
   {
     return kind_;
   }
 
 
   inline
-  SimpleCalcParser::symbol_kind_type
-  SimpleCalcParser::by_kind::type_get () const YY_NOEXCEPT
+  Calc1Parser::symbol_kind_type
+  Calc1Parser::by_kind::type_get () const YY_NOEXCEPT
   {
     return this->kind ();
   }
 
 
-#line 145 "./simple_calc/grammar/simple_calc_parser.bison.y"
-} // simplecalc
-#line 1598 "./simple_calc/flexbison.gen/simple_calc_parser.bison.h"
+#line 139 "./calc1/grammar/calc1_parser.bison.y"
+} // calc1
+#line 1590 "./calc1/flexbison.gen/calc1_parser.bison.h"
 
 
 // "%code provides" blocks.
-#line 173 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 161 "./calc1/grammar/calc1_parser.bison.y"
 
 // %code provides codeblock
 // goes in .h after namespace and parser class
-// everything here needs SimpleCalcParser defined earlier
+// everything here needs Calc1Parser defined earlier
 
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 
-// parser objects
-namespace simplecalc {
 
-using namespace std;
-
-}
+#line 1605 "./calc1/flexbison.gen/calc1_parser.bison.h"
 
 
-#line 1620 "./simple_calc/flexbison.gen/simple_calc_parser.bison.h"
-
-
-#endif // !YY_YY_SIMPLE_CALC_PARSER_BISON_H_INCLUDED
+#endif // !YY_YY_CALC1_PARSER_BISON_H_INCLUDED

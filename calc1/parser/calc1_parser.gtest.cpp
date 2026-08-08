@@ -1,4 +1,4 @@
-// simple_calc_parser.gtest.cpp
+// calc1_parser.gtest.cpp
 
 /*
 MIT License
@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "lexer/simple_calc_lexer.h"
-#include "simple_calc_parser.bison.h"
+#include "lexer/calc1_lexer.h"
+#include "calc1_parser.bison.h"
 
 #include <sstream>
 #include <string>
@@ -37,25 +37,24 @@ using namespace std;
 
 using namespace ::testing;
 
-namespace simplecalc::testing {
+namespace calc1::testing {
 
-TEST(BisonNoFlex, test_0000) {
+TEST(Calc1_BisonNoFlex, test_0000) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
-    auto tok = tokens.front();
-    if(tok.name() != "end of file"s) {
-      println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
-    } else {
-      println("yylex.lambda: return token {}", tok.name());
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
     }
+    auto tok = tokens.front();
+    println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
     tokens.pop();
     return tok;
   },
@@ -66,20 +65,23 @@ TEST(BisonNoFlex, test_0000) {
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(BisonNoFlex, test_0001) {
+TEST(Calc1_BisonNoFlex, test_0001) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // 3 * 5
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_TIMES(location{}),
-    SimpleCalcParser::make_INT(5, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_TIMES(location{}),
+    Calc1Parser::make_INT(5, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -96,22 +98,25 @@ TEST(BisonNoFlex, test_0001) {
   EXPECT_EQ(bisonParam.expr, 15);
 }
 
-TEST(BisonNoFlex, test_0002) {
+TEST(Calc1_BisonNoFlex, test_0002) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // 3 + 5 * 7
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_INT(5, location{}),
-    SimpleCalcParser::make_TIMES(location{}),
-    SimpleCalcParser::make_INT(7, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+    Calc1Parser::make_TIMES(location{}),
+    Calc1Parser::make_INT(7, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -130,22 +135,25 @@ TEST(BisonNoFlex, test_0002) {
   EXPECT_EQ(bisonParam.expr, 38);
 }
 
-TEST(BisonNoFlex, test_0003) {
+TEST(Calc1_BisonNoFlex, test_0003) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // 3 + x * 7
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_TIMES(location{}),
-    SimpleCalcParser::make_INT(7, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_TIMES(location{}),
+    Calc1Parser::make_INT(7, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -164,20 +172,23 @@ TEST(BisonNoFlex, test_0003) {
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(BisonNoFlex, test_0004) {
+TEST(Calc1_BisonNoFlex, test_0004) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // x = 7
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_INT(7, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_INT(7, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -196,22 +207,25 @@ TEST(BisonNoFlex, test_0004) {
   EXPECT_EQ(bisonParam.expr, 7);
 }
 
-TEST(BisonNoFlex, test_0005) {
+TEST(Calc1_BisonNoFlex, test_0005) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // x = 3 + 5
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_INT(5, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -231,22 +245,25 @@ TEST(BisonNoFlex, test_0005) {
   EXPECT_EQ(bisonParam.symtab["x"], 8);
 }
 
-TEST(BisonNoFlex, test_0006) {
+TEST(Calc1_BisonNoFlex, test_0006) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // x = y = 7
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_IDENT("y", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_INT(7, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_IDENT("y", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_INT(7, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -267,26 +284,29 @@ TEST(BisonNoFlex, test_0006) {
   EXPECT_EQ(bisonParam.symtab["y"], 7);
 }
 
-TEST(BisonNoFlex, test_0007) {
+TEST(Calc1_BisonNoFlex, test_0007) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // x = 7; y = x + 5
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_INT(7, location{}),
-    SimpleCalcParser::make_SEMICOLON(location{}),
-    SimpleCalcParser::make_IDENT("y", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_INT(5, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_INT(7, location{}),
+    Calc1Parser::make_SEMICOLON(location{}),
+    Calc1Parser::make_IDENT("y", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -307,30 +327,33 @@ TEST(BisonNoFlex, test_0007) {
   EXPECT_EQ(bisonParam.symtab["y"], 12);
 }
 
-TEST(BisonNoFlex, test_0008) {
+TEST(Calc1_BisonNoFlex, test_0008) {
 
   BisonParam bisonParam;
   LexParam lexParam;
 
 // (x = (3 + 5) * 2) + 9 -> 25, x == 16
-  queue<SimpleCalcParser::symbol_type> tokens{{
-    SimpleCalcParser::make_LEFT_PAREN(location{}),
-    SimpleCalcParser::make_IDENT("x", location{}),
-    SimpleCalcParser::make_EQUAL(location{}),
-    SimpleCalcParser::make_LEFT_PAREN(location{}),
-    SimpleCalcParser::make_INT(3, location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_INT(5, location{}),
-    SimpleCalcParser::make_RIGHT_PAREN(location{}),
-    SimpleCalcParser::make_TIMES(location{}),
-    SimpleCalcParser::make_INT(2, location{}),
-    SimpleCalcParser::make_RIGHT_PAREN(location{}),
-    SimpleCalcParser::make_PLUS(location{}),
-    SimpleCalcParser::make_INT(9, location{}),
-    SimpleCalcParser::make_YYEOF(location{})
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_LEFT_PAREN(location{}),
+    Calc1Parser::make_IDENT("x", location{}),
+    Calc1Parser::make_EQUAL(location{}),
+    Calc1Parser::make_LEFT_PAREN(location{}),
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+    Calc1Parser::make_RIGHT_PAREN(location{}),
+    Calc1Parser::make_TIMES(location{}),
+    Calc1Parser::make_INT(2, location{}),
+    Calc1Parser::make_RIGHT_PAREN(location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_INT(9, location{}),
   }};
 
-  SimpleCalcParser parser([&tokens](LexParam&) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      println("yylex.lambda: return token eof");
+      return Calc1Parser::make_YYEOF(location{});
+    }
     auto tok = tokens.front();
     if(tok.name() == "INT"s) {
       println("yylex.lambda: return token {} {}", tok.name(), tok.value.as<int64_t>());
@@ -350,14 +373,14 @@ TEST(BisonNoFlex, test_0008) {
   EXPECT_EQ(bisonParam.symtab["x"], 16);
 }
 
-TEST(Bison, test_0000) {
+TEST(Calc1_Bison, test_0000) {
 
   stringstream s("2 + 3");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -367,14 +390,14 @@ TEST(Bison, test_0000) {
   EXPECT_EQ(bisonParam.expr, 5);
 }
 
-TEST(Bison, test_0001) {
+TEST(Calc1_Bison, test_0001) {
 
   stringstream s("2 - 7");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -384,14 +407,14 @@ TEST(Bison, test_0001) {
   EXPECT_EQ(bisonParam.expr, -5);
 }
 
-TEST(Bison, test_0002) {
+TEST(Calc1_Bison, test_0002) {
 
   stringstream s("-2 + -7");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -401,14 +424,14 @@ TEST(Bison, test_0002) {
   EXPECT_EQ(bisonParam.expr, -9);
 }
 
-TEST(Bison, test_0003) {
+TEST(Calc1_Bison, test_0003) {
 
   stringstream s("a = b = c = 10");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -421,7 +444,7 @@ TEST(Bison, test_0003) {
   EXPECT_EQ(bisonParam.symtab["c"], 10);
 }
 
-TEST(Bison, test_0004) {
+TEST(Calc1_Bison, test_0004) {
 
   stringstream s(R"%(
 a = 3; b = 5;
@@ -429,11 +452,11 @@ c=7;
 x = a + b * c;
 )%");
 
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -447,17 +470,17 @@ x = a + b * c;
   EXPECT_EQ(bisonParam.symtab["c"], 7);
 }
 
-TEST(Bison, test_0005) {
+TEST(Calc1_Bison, test_0005) {
 
   stringstream s(R"%(
 a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
 ((a + b) * (c - d)) / (e + f)
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -467,16 +490,16 @@ a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(Bison, test_0006) {
+TEST(Calc1_Bison, test_0006) {
 
   stringstream s(R"%(
 100 / 10 / 2
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -486,16 +509,16 @@ TEST(Bison, test_0006) {
   EXPECT_EQ(bisonParam.expr, 5);
 }
 
-TEST(Bison, test_0007) {
+TEST(Calc1_Bison, test_0007) {
 
   stringstream s(R"%(
 (a) = 5;
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -504,16 +527,16 @@ TEST(Bison, test_0007) {
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Bison, test_0008) {
+TEST(Calc1_Bison, test_0008) {
 
   stringstream s(R"%(
 a = b * / c
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -522,17 +545,56 @@ a = b * / c
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Bison, test_0009) {
+TEST(Calc1_Bison, test_0009) {
+
+  stringstream s(R"%(
+a + b = c
+)%");
+  Calc1Lexer lexer(s);
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_NE(parser(), 0);
+}
+
+TEST(Calc1_Bison, test_0010) {
+
+  stringstream s(R"%(
+a = 7; b = 3; c = -5;
+a + (b = c)
+)%");
+  Calc1Lexer lexer(s);
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, 2);
+  EXPECT_EQ(bisonParam.symtab["b"], -5);
+}
+
+TEST(Calc1_Bison, test_0011) {
 
   stringstream s(R"%(
 a = 7; b = 3; c = -5;
 a = -b * -c
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,
@@ -543,17 +605,17 @@ a = -b * -c
   EXPECT_EQ(bisonParam.symtab["a"], -15);
 }
 
-TEST(Bison, test_0010) {
+TEST(Calc1_Bison, test_0012) {
 
   stringstream s(R"%(
 c = 3;
 a = (b = c + 5) * 2
 )%");
-  Lexer lexer(s);
+  Calc1Lexer lexer(s);
   BisonParam bisonParam;
   LexParam lexParam;
 
-  SimpleCalcParser parser([&lexer](LexParam& lexParam) -> SimpleCalcParser::symbol_type {
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
     return lexer.yylex(lexParam);
   },
   bisonParam,

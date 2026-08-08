@@ -1,6 +1,6 @@
-#ifndef SIMPLE_CALC_LEXER_GUARD
-#define SIMPLE_CALC_LEXER_GUARD
-// simple_calc_lexer_guard.h
+#ifndef CALC1_LEXER_H
+#define CALC1_LEXER_H
+// lexer.h
 
 /*
 MIT License
@@ -26,12 +26,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// make sure redefinition happens just once using FlexLexer.h macro that guards yyFlexLexer class definition
-#ifndef yyFlexLexerOnce
-#  undef yyFlexLexer
-#  define yyFlexLexer SimpleCalcFlexLexer
-#  include "FlexLexer.h"
-#endif
+#include "calc1_parser.bison.h"
+
+#include "calc1_lexer_guard.h"
+
+namespace calc1 {
+using namespace std;
+
+class Calc1Lexer: public Calc1FlexLexer {
+public:
+
+// can only declare here since flex generates the implementation
+  Calc1Parser::symbol_type yylex(LexParam&);
+
+  Calc1Lexer() = default;
+
+  explicit Calc1Lexer(istream* yyin_arg): Calc1FlexLexer(yyin_arg) {}
+  explicit Calc1Lexer(istream& yyin_arg): Calc1FlexLexer(&yyin_arg) {}
+
+private:
+
+// fix gcc warning -Woverloaded-virtual that virtual int Calc1ParserFlexLexer::yylex() was hidden
+  using Calc1FlexLexer::yylex;
+  
+};
+
+}
 
 #endif
 

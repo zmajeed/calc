@@ -1,4 +1,6 @@
-// simple_calc_parser.rules.bison.y
+#ifndef CALC1_LEXER_GUARD
+#define CALC1_LEXER_GUARD
+// calc1_lexer_guard.h
 
 /*
 MIT License
@@ -24,35 +26,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// calc grammar without clutter of semantic actions
-// bison -Wall -Wdangling-alias -Werror --color=always -Wcounterexamples --report=counterexamples,lookaheads,solved --report-file=bisonreport.txt simple_calc_parser.rules.bison.y
+// make sure redefinition happens just once using FlexLexer.h macro that guards yyFlexLexer class definition
+#ifndef yyFlexLexerOnce
+#  undef yyFlexLexer
+#  define yyFlexLexer Calc1FlexLexer
+#  include "FlexLexer.h"
+#endif
 
-%token DIV                  "/"
-%token EQUAL                "="
-%token LEFT_PAREN           "("
-%token MINUS                "-"
-%token PLUS                 "+"
-%token RIGHT_PAREN          ")"
-%token SEMICOLON            ";"
-%token TIMES                "*"
+#endif
 
-%token                      INT
-%token                      IDENT
-
-%start expr
-
-%%
-
-expr: assign_exprs | assign_exprs ";"
-
-assign_exprs: assign_expr | assign_exprs ";" assign_expr
-
-assign_expr: IDENT "=" assign_expr | add_expr
-
-add_expr: term | add_expr "+" term | add_expr "-" term
-
-term: factor | term "*" factor | term "/" factor
-
-factor: atom | "+" factor | "-" factor
-
-atom: INT | IDENT | "(" expr ")"

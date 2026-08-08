@@ -1,8 +1,8 @@
-# simple_calc/CMakeLists.txt
+# calc/CMakeLists.txt
 
 cmake_minimum_required(VERSION 4.2)
 
-project(calc_minimal)
+project(calc)
 
 include(FetchContent)
 
@@ -14,7 +14,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_subdirectory(thirdparty)
-add_subdirectory(simple_calc)
+execute_process(
+  COMMAND bash -c "git log -1 --oneline; git remote -v | head -1; git branch"
+  WORKING_DIRECTORY ${googletest_SOURCE_DIR}
+  OUTPUT_VARIABLE cmdout
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message(STATUS "googletest source:\n${cmdout}")
 
 enable_testing()
+
+add_subdirectory(thirdparty)
+add_subdirectory(calc1)
+add_subdirectory(calc2)
+

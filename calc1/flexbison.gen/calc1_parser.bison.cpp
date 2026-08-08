@@ -35,7 +35,7 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 191 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 172 "./calc1/grammar/calc1_parser.bison.y"
 
 // % code top
 // appears as topmost code block in generated .cpp file just below gnu license
@@ -66,24 +66,24 @@ SOFTWARE.
 */
 
 
-#line 70 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 70 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
 
 // First part of user prologue.
-#line 222 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 203 "./calc1/grammar/calc1_parser.bison.y"
 
 // %{ unnamed codeblock
 // goes at top of .cpp file after %code top, before namespace and parser class
 
 
-#line 80 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 80 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
 
-#include "simple_calc_parser.bison.h"
+#include "calc1_parser.bison.h"
 
 
 // Unqualified %code blocks.
-#line 228 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 209 "./calc1/grammar/calc1_parser.bison.y"
 
 // %code
 // appears in generated .cpp file after #include of generated .h file and before parser namespace and class
@@ -93,35 +93,20 @@ SOFTWARE.
 #include <set>
 #include <map>
 #include <utility>
-#include <algorithm>
-#include <chrono>
 #include <print>
-#include <ranges>
-#include <sstream>
-
-#ifdef _MSC_VER
-// disable vc++ warning C4065, switch statement contains default but no other case labels when there are no semantic actions
-#pragma warning(push)
-#pragma warning(disable: 4065)
-
-// disable vc++ warning C4244, return conversion from const short to findqparser::FindqParser::state_type, possible loss of data 
-#pragma warning(push)
-#pragma warning(disable: 4244)
-#endif
 
 using namespace std;
-using views::as_rvalue;
 
 namespace {
   const auto defaultInputName = "inputstream"s;
 }
 
-void simplecalc::SimpleCalcParser::error(const location& loc, const string& msg) {
+void calc1::Calc1Parser::error(const location& loc, const string& msg) {
   println("error at {}: {}", loc, msg);
 }
 
 
-#line 125 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 110 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
 
 #ifndef YY_
@@ -212,12 +197,12 @@ void simplecalc::SimpleCalcParser::error(const location& loc, const string& msg)
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 145 "./simple_calc/grammar/simple_calc_parser.bison.y"
-namespace simplecalc {
-#line 218 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 139 "./calc1/grammar/calc1_parser.bison.y"
+namespace calc1 {
+#line 203 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
   /// Build a parser object.
-  SimpleCalcParser::SimpleCalcParser (function<SimpleCalcParser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg)
+  Calc1Parser::Calc1Parser (function<Calc1Parser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
@@ -229,10 +214,10 @@ namespace simplecalc {
       lexParam (lexParam_yyarg)
   {}
 
-  SimpleCalcParser::~SimpleCalcParser ()
+  Calc1Parser::~Calc1Parser ()
   {}
 
-  SimpleCalcParser::syntax_error::~syntax_error () YY_NOEXCEPT YY_NOTHROW
+  Calc1Parser::syntax_error::~syntax_error () YY_NOEXCEPT YY_NOTHROW
   {}
 
   /*---------.
@@ -242,33 +227,33 @@ namespace simplecalc {
 
 
   // by_state.
-  SimpleCalcParser::by_state::by_state () YY_NOEXCEPT
+  Calc1Parser::by_state::by_state () YY_NOEXCEPT
     : state (empty_state)
   {}
 
-  SimpleCalcParser::by_state::by_state (const by_state& that) YY_NOEXCEPT
+  Calc1Parser::by_state::by_state (const by_state& that) YY_NOEXCEPT
     : state (that.state)
   {}
 
   void
-  SimpleCalcParser::by_state::clear () YY_NOEXCEPT
+  Calc1Parser::by_state::clear () YY_NOEXCEPT
   {
     state = empty_state;
   }
 
   void
-  SimpleCalcParser::by_state::move (by_state& that)
+  Calc1Parser::by_state::move (by_state& that)
   {
     state = that.state;
     that.clear ();
   }
 
-  SimpleCalcParser::by_state::by_state (state_type s) YY_NOEXCEPT
+  Calc1Parser::by_state::by_state (state_type s) YY_NOEXCEPT
     : state (s)
   {}
 
-  SimpleCalcParser::symbol_kind_type
-  SimpleCalcParser::by_state::kind () const YY_NOEXCEPT
+  Calc1Parser::symbol_kind_type
+  Calc1Parser::by_state::kind () const YY_NOEXCEPT
   {
     if (state == empty_state)
       return symbol_kind::S_YYEMPTY;
@@ -276,10 +261,10 @@ namespace simplecalc {
       return YY_CAST (symbol_kind_type, yystos_[+state]);
   }
 
-  SimpleCalcParser::stack_symbol_type::stack_symbol_type ()
+  Calc1Parser::stack_symbol_type::stack_symbol_type ()
   {}
 
-  SimpleCalcParser::stack_symbol_type::stack_symbol_type (YY_RVREF (stack_symbol_type) that)
+  Calc1Parser::stack_symbol_type::stack_symbol_type (YY_RVREF (stack_symbol_type) that)
     : super_type (YY_MOVE (that.state), YY_MOVE (that.location))
   {
     switch (that.kind ())
@@ -309,7 +294,7 @@ namespace simplecalc {
 #endif
   }
 
-  SimpleCalcParser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
+  Calc1Parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
     : super_type (s, YY_MOVE (that.location))
   {
     switch (that.kind ())
@@ -338,8 +323,8 @@ namespace simplecalc {
   }
 
 #if YY_CPLUSPLUS < 201103L
-  SimpleCalcParser::stack_symbol_type&
-  SimpleCalcParser::stack_symbol_type::operator= (const stack_symbol_type& that)
+  Calc1Parser::stack_symbol_type&
+  Calc1Parser::stack_symbol_type::operator= (const stack_symbol_type& that)
   {
     state = that.state;
     switch (that.kind ())
@@ -367,8 +352,8 @@ namespace simplecalc {
     return *this;
   }
 
-  SimpleCalcParser::stack_symbol_type&
-  SimpleCalcParser::stack_symbol_type::operator= (stack_symbol_type& that)
+  Calc1Parser::stack_symbol_type&
+  Calc1Parser::stack_symbol_type::operator= (stack_symbol_type& that)
   {
     state = that.state;
     switch (that.kind ())
@@ -401,7 +386,7 @@ namespace simplecalc {
 
   template <typename Base>
   void
-  SimpleCalcParser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const
+  Calc1Parser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const
   {
     if (yymsg)
       YY_SYMBOL_PRINT (yymsg, yysym);
@@ -410,7 +395,7 @@ namespace simplecalc {
 #if YYDEBUG
   template <typename Base>
   void
-  SimpleCalcParser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
+  Calc1Parser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
   {
     std::ostream& yyoutput = yyo;
     YY_USE (yyoutput);
@@ -429,7 +414,7 @@ namespace simplecalc {
 #endif
 
   void
-  SimpleCalcParser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
+  Calc1Parser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
   {
     if (m)
       YY_SYMBOL_PRINT (m, sym);
@@ -437,7 +422,7 @@ namespace simplecalc {
   }
 
   void
-  SimpleCalcParser::yypush_ (const char* m, state_type s, YY_MOVE_REF (symbol_type) sym)
+  Calc1Parser::yypush_ (const char* m, state_type s, YY_MOVE_REF (symbol_type) sym)
   {
 #if 201103L <= YY_CPLUSPLUS
     yypush_ (m, stack_symbol_type (s, std::move (sym)));
@@ -448,40 +433,40 @@ namespace simplecalc {
   }
 
   void
-  SimpleCalcParser::yypop_ (int n) YY_NOEXCEPT
+  Calc1Parser::yypop_ (int n) YY_NOEXCEPT
   {
     yystack_.pop (n);
   }
 
 #if YYDEBUG
   std::ostream&
-  SimpleCalcParser::debug_stream () const
+  Calc1Parser::debug_stream () const
   {
     return *yycdebug_;
   }
 
   void
-  SimpleCalcParser::set_debug_stream (std::ostream& o)
+  Calc1Parser::set_debug_stream (std::ostream& o)
   {
     yycdebug_ = &o;
   }
 
 
-  SimpleCalcParser::debug_level_type
-  SimpleCalcParser::debug_level () const
+  Calc1Parser::debug_level_type
+  Calc1Parser::debug_level () const
   {
     return yydebug_;
   }
 
   void
-  SimpleCalcParser::set_debug_level (debug_level_type l)
+  Calc1Parser::set_debug_level (debug_level_type l)
   {
     yydebug_ = l;
   }
 #endif // YYDEBUG
 
-  SimpleCalcParser::state_type
-  SimpleCalcParser::yy_lr_goto_state_ (state_type yystate, int yysym)
+  Calc1Parser::state_type
+  Calc1Parser::yy_lr_goto_state_ (state_type yystate, int yysym)
   {
     int yyr = yypgoto_[yysym - YYNTOKENS] + yystate;
     if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate)
@@ -491,25 +476,25 @@ namespace simplecalc {
   }
 
   bool
-  SimpleCalcParser::yy_pact_value_is_default_ (int yyvalue) YY_NOEXCEPT
+  Calc1Parser::yy_pact_value_is_default_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yypact_ninf_;
   }
 
   bool
-  SimpleCalcParser::yy_table_value_is_error_ (int yyvalue) YY_NOEXCEPT
+  Calc1Parser::yy_table_value_is_error_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yytable_ninf_;
   }
 
   int
-  SimpleCalcParser::operator() ()
+  Calc1Parser::operator() ()
   {
     return parse ();
   }
 
   int
-  SimpleCalcParser::parse ()
+  Calc1Parser::parse ()
   {
     int yyn;
     /// Length of the RHS of the rule being reduced.
@@ -536,7 +521,7 @@ namespace simplecalc {
 
 
     // User initialization code.
-#line 266 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 232 "./calc1/grammar/calc1_parser.bison.y"
 {
 // %initial-action codeblock
 // goes inside parse() function in .cpp, it's a separate brace-scoped block, anything declared here is local to this block and cannot be used anywhere else in parse()
@@ -545,8 +530,6 @@ namespace simplecalc {
 // yynerrs_ is local to generated parse function
   (void)yynerrs_;
 
-  bisonParam.stats.parseStartTime = steady_clock::now();
-
   auto& loc = lexParam.loc;
 
   if(loc.begin.filename == nullptr) {
@@ -554,7 +537,7 @@ namespace simplecalc {
   }
 }
 
-#line 558 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 541 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
 
     /* Initialize the stack.  The initial state will be set in
@@ -704,42 +687,42 @@ namespace simplecalc {
         {
           switch (yyn)
             {
-  case 2: // expr: assign_exprs postprocess
-#line 310 "./simple_calc/grammar/simple_calc_parser.bison.y"
-                           {
+  case 2: // expr: assign_exprs
+#line 274 "./calc1/grammar/calc1_parser.bison.y"
+               {
+  yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
+  bisonParam.expr = yylhs.value.as < int64_t > ();
+}
+#line 697 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+    break;
+
+  case 3: // expr: assign_exprs ";"
+#line 278 "./calc1/grammar/calc1_parser.bison.y"
+                   {
   yylhs.value.as < int64_t > () = yystack_[1].value.as < int64_t > ();
   bisonParam.expr = yylhs.value.as < int64_t > ();
 }
-#line 714 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
-    break;
-
-  case 3: // expr: assign_exprs ";" postprocess
-#line 314 "./simple_calc/grammar/simple_calc_parser.bison.y"
-                               {
-  yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > ();
-  bisonParam.expr = yylhs.value.as < int64_t > ();
-}
-#line 723 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 706 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 4: // assign_exprs: assign_expr
-#line 321 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 285 "./calc1/grammar/calc1_parser.bison.y"
               {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 731 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 714 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 5: // assign_exprs: assign_exprs ";" assign_expr
-#line 324 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 288 "./calc1/grammar/calc1_parser.bison.y"
                                {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 739 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 722 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 6: // assign_expr: IDENT "=" assign_expr
-#line 329 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 293 "./calc1/grammar/calc1_parser.bison.y"
                              {
   if(!bisonParam.symtab.contains(yystack_[2].value.as < string > ())) {
     bisonParam.symtab[yystack_[2].value.as < string > ()] = 0;
@@ -747,128 +730,118 @@ namespace simplecalc {
   bisonParam.symtab[yystack_[2].value.as < string > ()] = yystack_[0].value.as < int64_t > ();
   yylhs.value.as < int64_t > () = bisonParam.symtab[yystack_[2].value.as < string > ()];
 }
-#line 751 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 734 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 7: // assign_expr: add_expr
-#line 336 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 300 "./calc1/grammar/calc1_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 759 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 742 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 8: // add_expr: term
-#line 341 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 305 "./calc1/grammar/calc1_parser.bison.y"
        {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 767 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 750 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 9: // add_expr: add_expr "+" term
-#line 344 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 308 "./calc1/grammar/calc1_parser.bison.y"
                     {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () + yystack_[0].value.as < int64_t > ();
 }
-#line 775 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 758 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 10: // add_expr: add_expr "-" term
-#line 347 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 311 "./calc1/grammar/calc1_parser.bison.y"
                     {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () - yystack_[0].value.as < int64_t > ();
 }
-#line 783 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 766 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 11: // term: factor
-#line 352 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 316 "./calc1/grammar/calc1_parser.bison.y"
          {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 791 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 774 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 12: // term: term "*" factor
-#line 355 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 319 "./calc1/grammar/calc1_parser.bison.y"
                   {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () * yystack_[0].value.as < int64_t > ();
 }
-#line 799 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 782 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 13: // term: term "/" factor
-#line 358 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 322 "./calc1/grammar/calc1_parser.bison.y"
                   {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () / yystack_[0].value.as < int64_t > ();
 }
-#line 807 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 790 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 14: // factor: atom
-#line 363 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 327 "./calc1/grammar/calc1_parser.bison.y"
        {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 815 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 798 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 15: // factor: "+" atom
-#line 366 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 330 "./calc1/grammar/calc1_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 823 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 806 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 16: // factor: "-" atom
-#line 369 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 333 "./calc1/grammar/calc1_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = -1 * yystack_[0].value.as < int64_t > ();
 }
-#line 831 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 814 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 17: // atom: INT
-#line 374 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 338 "./calc1/grammar/calc1_parser.bison.y"
       {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 839 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 822 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 18: // atom: IDENT
-#line 377 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 341 "./calc1/grammar/calc1_parser.bison.y"
         {
   if(!bisonParam.symtab.contains(yystack_[0].value.as < string > ())) {
     bisonParam.symtab[yystack_[0].value.as < string > ()] = 0;
   }
   yylhs.value.as < int64_t > () = bisonParam.symtab[yystack_[0].value.as < string > ()];
 }
-#line 850 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 833 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
   case 19: // atom: "(" expr ")"
-#line 383 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 347 "./calc1/grammar/calc1_parser.bison.y"
                {
   yylhs.value.as < int64_t > () = yystack_[1].value.as < int64_t > ();
 }
-#line 858 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
-    break;
-
-  case 20: // postprocess: %empty
-#line 388 "./simple_calc/grammar/simple_calc_parser.bison.y"
-                    {
-  auto& [start, end, elapsed] = bisonParam.stats;
-  end = steady_clock::now();
-  elapsed = end - start;
-}
-#line 868 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 841 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
 
-#line 872 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 845 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
             default:
               break;
@@ -1041,33 +1014,33 @@ namespace simplecalc {
   }
 
   void
-  SimpleCalcParser::error (const syntax_error& yyexc)
+  Calc1Parser::error (const syntax_error& yyexc)
   {
     error (yyexc.location, yyexc.what ());
   }
 
   const char *
-  SimpleCalcParser::symbol_name (symbol_kind_type yysymbol)
+  Calc1Parser::symbol_name (symbol_kind_type yysymbol)
   {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "/", "=", "(", "-", "+", ")",
   ";", "*", "IDENT", "INT", "$accept", "expr", "assign_exprs",
-  "assign_expr", "add_expr", "term", "factor", "atom", "postprocess", YY_NULLPTR
+  "assign_expr", "add_expr", "term", "factor", "atom", YY_NULLPTR
     };
     return yy_sname[yysymbol];
   }
 
 
 
-  // SimpleCalcParser::context.
-  SimpleCalcParser::context::context (const SimpleCalcParser& yyparser, const symbol_type& yyla)
+  // Calc1Parser::context.
+  Calc1Parser::context::context (const Calc1Parser& yyparser, const symbol_type& yyla)
     : yyparser_ (yyparser)
     , yyla_ (yyla)
   {}
 
   int
-  SimpleCalcParser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
+  Calc1Parser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
   {
     // Actual number of expected tokens
     int yycount = 0;
@@ -1106,7 +1079,7 @@ namespace simplecalc {
 
 
   int
-  SimpleCalcParser::yy_syntax_error_arguments_ (const context& yyctx,
+  Calc1Parser::yy_syntax_error_arguments_ (const context& yyctx,
                                                  symbol_kind_type yyarg[], int yyargn) const
   {
     /* There are many possibilities here to consider:
@@ -1146,7 +1119,7 @@ namespace simplecalc {
 
   // Generate an error message.
   std::string
-  SimpleCalcParser::yysyntax_error_ (const context& yyctx) const
+  Calc1Parser::yysyntax_error_ (const context& yyctx) const
   {
     // Its maximum.
     enum { YYARGS_MAX = 5 };
@@ -1186,81 +1159,77 @@ namespace simplecalc {
   }
 
 
-  const signed char SimpleCalcParser::yypact_ninf_ = -6;
+  const signed char Calc1Parser::yypact_ninf_ = -6;
 
-  const signed char SimpleCalcParser::yytable_ninf_ = -1;
+  const signed char Calc1Parser::yytable_ninf_ = -1;
 
   const signed char
-  SimpleCalcParser::yypact_[] =
+  Calc1Parser::yypact_[] =
   {
-      -5,    -5,     3,     3,    12,    -6,    26,    18,    -6,     6,
+      -5,    -5,     3,     3,    12,    -6,    20,    14,    -6,     6,
        8,    -6,    -6,    21,    -6,    -6,    -6,    -5,    -6,    -5,
-      -6,    -2,    -2,    -2,    -2,    -6,    -6,    -6,    -6,     8,
-       8,    -6,    -6
+      -2,    -2,    -2,    -2,    -6,    -6,    -6,     8,     8,    -6,
+      -6
   };
 
   const signed char
-  SimpleCalcParser::yydefact_[] =
+  Calc1Parser::yydefact_[] =
   {
-       0,     0,     0,     0,    18,    17,     0,    20,     4,     7,
-       8,    11,    14,     0,    18,    16,    15,     0,     1,    20,
-       2,     0,     0,     0,     0,    19,     6,     5,     3,    10,
-       9,    13,    12
+       0,     0,     0,     0,    18,    17,     0,     2,     4,     7,
+       8,    11,    14,     0,    18,    16,    15,     0,     1,     3,
+       0,     0,     0,     0,    19,     6,     5,    10,     9,    13,
+      12
   };
 
   const signed char
-  SimpleCalcParser::yypgoto_[] =
+  Calc1Parser::yypgoto_[] =
   {
-      -6,    27,    -6,     0,    -6,    -1,     1,    20,    11
+      -6,    27,    -6,     0,    -6,     1,     2,    24
   };
 
   const signed char
-  SimpleCalcParser::yydefgoto_[] =
+  Calc1Parser::yydefgoto_[] =
   {
-       0,     6,     7,     8,     9,    10,    11,    12,    20
+       0,     6,     7,     8,     9,    10,    11,    12
   };
 
   const signed char
-  SimpleCalcParser::yytable_[] =
+  Calc1Parser::yytable_[] =
   {
        1,     2,     3,     1,     2,     3,     4,     5,     1,    14,
-       5,    23,    21,    22,    14,     5,    17,    26,    24,    27,
-      29,    30,    15,    16,    31,    32,    18,    19,    13,    25,
-      28
+       5,    22,    20,    21,    14,     5,    17,    25,    23,    26,
+      18,    27,    28,    19,    29,    30,    15,    16,    13,    24
   };
 
   const signed char
-  SimpleCalcParser::yycheck_[] =
+  Calc1Parser::yycheck_[] =
   {
        5,     6,     7,     5,     6,     7,    11,    12,     5,    11,
       12,     3,     6,     7,    11,    12,     4,    17,    10,    19,
-      21,    22,     2,     3,    23,    24,     0,     9,     1,     8,
+       0,    20,    21,     9,    22,    23,     2,     3,     1,     8
+  };
+
+  const signed char
+  Calc1Parser::yystos_[] =
+  {
+       0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
+      18,    19,    20,    14,    11,    20,    20,     4,     0,     9,
+       6,     7,     3,    10,     8,    16,    16,    18,    18,    19,
       19
   };
 
   const signed char
-  SimpleCalcParser::yystos_[] =
-  {
-       0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
-      18,    19,    20,    14,    11,    20,    20,     4,     0,     9,
-      21,     6,     7,     3,    10,     8,    16,    16,    21,    18,
-      18,    19,    19
-  };
-
-  const signed char
-  SimpleCalcParser::yyr1_[] =
+  Calc1Parser::yyr1_[] =
   {
        0,    13,    14,    14,    15,    15,    16,    16,    17,    17,
-      17,    18,    18,    18,    19,    19,    19,    20,    20,    20,
-      21
+      17,    18,    18,    18,    19,    19,    19,    20,    20,    20
   };
 
   const signed char
-  SimpleCalcParser::yyr2_[] =
+  Calc1Parser::yyr2_[] =
   {
-       0,     2,     2,     3,     1,     3,     3,     1,     1,     3,
-       3,     1,     3,     3,     1,     2,     2,     1,     1,     3,
-       0
+       0,     2,     1,     2,     1,     3,     3,     1,     1,     3,
+       3,     1,     3,     3,     1,     2,     2,     1,     1,     3
   };
 
 
@@ -1268,15 +1237,14 @@ namespace simplecalc {
 
 #if YYDEBUG
   const short
-  SimpleCalcParser::yyrline_[] =
+  Calc1Parser::yyrline_[] =
   {
-       0,   310,   310,   314,   321,   324,   329,   336,   341,   344,
-     347,   352,   355,   358,   363,   366,   369,   374,   377,   383,
-     388
+       0,   274,   274,   278,   285,   288,   293,   300,   305,   308,
+     311,   316,   319,   322,   327,   330,   333,   338,   341,   347
   };
 
   void
-  SimpleCalcParser::yy_stack_print_ () const
+  Calc1Parser::yy_stack_print_ () const
   {
     *yycdebug_ << "Stack now";
     for (stack_type::const_iterator
@@ -1288,7 +1256,7 @@ namespace simplecalc {
   }
 
   void
-  SimpleCalcParser::yy_reduce_print_ (int yyrule) const
+  Calc1Parser::yy_reduce_print_ (int yyrule) const
   {
     int yylno = yyrline_[yyrule];
     int yynrhs = yyr2_[yyrule];
@@ -1303,18 +1271,12 @@ namespace simplecalc {
 #endif // YYDEBUG
 
 
-#line 145 "./simple_calc/grammar/simple_calc_parser.bison.y"
-} // simplecalc
-#line 1309 "./simple_calc/flexbison.gen/simple_calc_parser.bison.cpp"
+#line 139 "./calc1/grammar/calc1_parser.bison.y"
+} // calc1
+#line 1277 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
 
-#line 394 "./simple_calc/grammar/simple_calc_parser.bison.y"
+#line 351 "./calc1/grammar/calc1_parser.bison.y"
 
 // %code epilog block
 // goes at bottom of generated .cpp file after namespace and parser implementation
-
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#pragma warning(pop)
-#endif
 

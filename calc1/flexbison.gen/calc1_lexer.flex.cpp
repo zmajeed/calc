@@ -1,4 +1,4 @@
-#line 2 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
+#line 2 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
 // top of generated .cpp file
 
 // fix flex bug vc++ warning C4005, INT8_MIN macro redefinition
@@ -16,7 +16,7 @@
 #pragma warning(disable: 4244)
 #endif
 
-#line 20 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
+#line 20 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -44,28 +44,28 @@
      * We will address this in a future release of flex, or omit the C++ scanner
      * altogether.
      */
-    #define yyFlexLexer SimpleCalcFlexLexer
+    #define yyFlexLexer Calc1FlexLexer
 /* %endif */
 
 /* %if-c-only */
 /* %endif */
 
 #ifdef yyalloc
-#define SimpleCalcalloc_ALREADY_DEFINED
+#define Calc1alloc_ALREADY_DEFINED
 #else
-#define yyalloc SimpleCalcalloc
+#define yyalloc Calc1alloc
 #endif
 
 #ifdef yyrealloc
-#define SimpleCalcrealloc_ALREADY_DEFINED
+#define Calc1realloc_ALREADY_DEFINED
 #else
-#define yyrealloc SimpleCalcrealloc
+#define yyrealloc Calc1realloc
 #endif
 
 #ifdef yyfree
-#define SimpleCalcfree_ALREADY_DEFINED
+#define Calc1free_ALREADY_DEFINED
 #else
-#define yyfree SimpleCalcfree
+#define yyfree Calc1free
 #endif
 
 /* %if-c-only */
@@ -427,7 +427,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int Lexer::yylex()
+#define YY_DECL int Calc1Lexer::yylex()
 
 /* %% [1.5] DFA */
 static const flex_int16_t yy_nxt[][256] =
@@ -1109,8 +1109,8 @@ static const yy_state_type yy_NUL_trans[20] =
 
 static const flex_int16_t yy_rule_linenum[14] =
     {   0,
-      125,  142,  147,  152,  157,  162,  167,  172,  177,  182,
-      188,  193,  198
+      122,  139,  144,  149,  154,  159,  164,  169,  174,  179,
+      185,  190,  195
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -1120,8 +1120,8 @@ static const flex_int16_t yy_rule_linenum[14] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "./simple_calc/grammar/simple_calc_lexer.flex.l"
-/* simple_calc_lexer.flex.l */
+#line 1 "./calc1/grammar/calc1_lexer.flex.l"
+/* calc1_lexer.flex.l */
 /*
 MIT License
 
@@ -1145,32 +1145,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-/* flex -Cfe -o simple_calc_lexer.flex.cpp simple_calc_lexer.flex.l */
-/* g++ -O0 -Wall -Wextra -Werror -std=c++2b -o simple_calc_lexer simple_calc_lexer.flex.cpp */
-#line 31 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+/* flex -Cfe -o calc1_lexer.flex.cpp calc1_lexer.flex.l */
+/* g++ -O0 -Wall -Wextra -Werror -std=c++2b -o calc1_lexer calc1_lexer.flex.cpp */
+#line 31 "./calc1/grammar/calc1_lexer.flex.l"
  // flex directives
  // turn on warnings
  // always generate 8bit lexer
  // C++ lexer class
  // custom C++ lexer classname
- // custom prefix to turn yyFlexLexer into SimpleCalcFlexLexer
+ // custom prefix to turn yyFlexLexer into Calc1FlexLexer
  // disable default rule that echoes unmatched input, gives flex scanner jammed error for any unmatched input
  // noninteractive lexer has better performance, use with -Cfe
  // disable various options for interactive lexer
 #define YY_NO_INPUT 1
  // flex start conditions ie states
  // INITIAL 0 is default start condition
- // start conditions do not appear here in generated .cpp file
- // instead they turn into macros defined inside ylex()
+ // start conditions appear as macros defined inside ylex()
 
 // bison generated header with C++ namespace and token definitions
-#include "simple_calc_parser.bison.h"
-#include "lexer/simple_calc_lexer.h"
+#include "calc1_parser.bison.h"
+#include "lexer/calc1_lexer.h"
 
 #undef YY_DECL
-// dummy parameter because yyFlexLexer::yylex(void) in static flex C++ header yyFlexLexer.h cannot be overridden, only overloaded
-// parameter has no name to avoid unused parameter warning
-#define YY_DECL simplecalc::SimpleCalcParser::symbol_type simplecalc::Lexer::yylex(LexParam& param)
+#define YY_DECL calc1::Calc1Parser::symbol_type calc1::Calc1Lexer::yylex(LexParam& param)
 
 // fix flex error could not convert 0 from int to symbol_type for #define YY_NULL 0
 // caused by turning on bison %locations because symbol_type no longer has single int constructor for implicit conversion
@@ -1178,15 +1175,15 @@ SOFTWARE.
 
 using namespace std;
 
-using namespace simplecalc;
+using namespace calc1;
 
 // needed for custom yyterminate
-using symbol_type = SimpleCalcParser::symbol_type;
+using symbol_type = Calc1Parser::symbol_type;
 
 // flex start conditions appear as macros in .cpp file here
 
-#line 1189 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
-#line 1190 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
+#line 1186 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
+#line 1187 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
 
 #define INITIAL 0
 
@@ -1366,10 +1363,10 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 111 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 108 "./calc1/grammar/calc1_lexer.flex.l"
 
 
-#line 114 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 111 "./calc1/grammar/calc1_lexer.flex.l"
  // code appears inside generated yylex function at start
 
  // position in input stream
@@ -1381,7 +1378,7 @@ YY_DECL
  /* only c-style comments starting at second column allowed inside rules section */
  /* first flex rule starts at beginning of line */
 
-#line 1385 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
+#line 1382 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1445,7 +1442,7 @@ do_action:	/* This label is used only to access EOF actions. */
 /* %% [13.0] actions go here */
 case 1:
 YY_RULE_SETUP
-#line 125 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 122 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
   int64_t val;
@@ -1457,89 +1454,89 @@ YY_RULE_SETUP
 #endif
   {
     println("malformed number {}", yytext);
-    return SimpleCalcParser::make_YYUNDEF(loc);
+    return Calc1Parser::make_YYUNDEF(loc);
   }
-  return SimpleCalcParser::make_INT(val, loc);
+  return Calc1Parser::make_INT(val, loc);
 }
 	YY_BREAK
 /* assumes typical identifier syntax */
 case 2:
 YY_RULE_SETUP
-#line 142 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 139 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_IDENT(yytext, loc);
+  return Calc1Parser::make_IDENT(yytext, loc);
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 147 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 144 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_DIV(loc);
+  return Calc1Parser::make_DIV(loc);
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 152 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 149 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_EQUAL(loc);
+  return Calc1Parser::make_EQUAL(loc);
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 157 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 154 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_LEFT_PAREN(loc);
+  return Calc1Parser::make_LEFT_PAREN(loc);
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 162 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 159 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_MINUS(loc);
+  return Calc1Parser::make_MINUS(loc);
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 167 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 164 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_PLUS(loc);
+  return Calc1Parser::make_PLUS(loc);
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 172 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 169 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_RIGHT_PAREN(loc);
+  return Calc1Parser::make_RIGHT_PAREN(loc);
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 177 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 174 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_SEMICOLON(loc);
+  return Calc1Parser::make_SEMICOLON(loc);
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 182 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 179 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_TIMES(loc);
+  return Calc1Parser::make_TIMES(loc);
 }
 	YY_BREAK
 /* match newlines separately to correctly update line numbers */
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 188 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 185 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.lines(yyleng);
 }
@@ -1547,7 +1544,7 @@ YY_RULE_SETUP
 /* whitespace except newline, same as [ \t\v\f\r] but easier to understand */
 case 12:
 YY_RULE_SETUP
-#line 193 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 190 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
 }
@@ -1555,18 +1552,18 @@ YY_RULE_SETUP
 /* all input must be consumed in every state */
 case 13:
 YY_RULE_SETUP
-#line 198 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 195 "./calc1/grammar/calc1_lexer.flex.l"
 {
   loc.columns(yyleng);
-  return SimpleCalcParser::make_YYUNDEF(loc);
+  return Calc1Parser::make_YYUNDEF(loc);
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 203 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 200 "./calc1/grammar/calc1_lexer.flex.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1570 "./simple_calc/flexbison.gen/simple_calc_lexer.flex.cpp"
+#line 1567 "./calc1/flexbison.gen/calc1_lexer.flex.cpp"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -2672,7 +2669,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 203 "./simple_calc/grammar/simple_calc_lexer.flex.l"
+#line 200 "./calc1/grammar/calc1_lexer.flex.l"
 
 
 #ifdef _MSC_VER
