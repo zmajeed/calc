@@ -68,8 +68,8 @@ add_custom_command(TARGET flexbisonlib.calc1 POST_BUILD
   COMMAND sed -E ${OPT_I} 's!${CMAKE_SOURCE_DIR}!.!' ${GEN_SRC_DIR}/calc1_parser.bison.h
   COMMAND sed -E ${OPT_I} 's!${CMAKE_CURRENT_BINARY_DIR}!${GEN_SRC_DIR}!' ${GEN_SRC_DIR}/calc1_parser.bison.cpp
   COMMAND sed -E ${OPT_I} 's!${CMAKE_SOURCE_DIR}!.!' ${GEN_SRC_DIR}/calc1_parser.bison.cpp
-  COMMAND sed -E ${OPT_I} 's!${CMAKE_CURRENT_BINARY_DIR}!${GEN_SRC_DIR}!' ${GEN_SRC_DIR}/locations.bison.h
-  COMMAND sed -E ${OPT_I} 's!${CMAKE_SOURCE_DIR}!.!' ${GEN_SRC_DIR}/locations.bison.h
+  COMMAND sed -E ${OPT_I} 's!${CMAKE_CURRENT_BINARY_DIR}!${GEN_SRC_DIR}!' ${GEN_SRC_DIR}/calc1_locations.bison.h
+  COMMAND sed -E ${OPT_I} 's!${CMAKE_SOURCE_DIR}!.!' ${GEN_SRC_DIR}/calc1_locations.bison.h
   COMMAND sed -E ${OPT_I} 's!${CMAKE_CURRENT_BINARY_DIR}!${GEN_SRC_DIR}!' ${GEN_SRC_DIR}/calc1_lexer.flex.cpp
   COMMAND sed -E ${OPT_I} 's!${CMAKE_SOURCE_DIR}!.!' ${GEN_SRC_DIR}/calc1_lexer.flex.cpp
 )
@@ -77,7 +77,7 @@ add_custom_command(TARGET flexbisonlib.calc1 POST_BUILD
 add_custom_command(TARGET flexbisonlib.calc1 POST_BUILD
   COMMENT "Verbatim strip absolute local paths from generated bison, flex files"
   COMMAND sed -E ${OPT_I} [[s/(YY_YY).*(_CALC1_PARSER_BISON_H)/\1\2/]] ${GEN_SRC_DIR}/calc1_parser.bison.h
-  COMMAND sed -E ${OPT_I} [[s/(YY_YY).*(_LOCATIONS_BISON_H)/\1\2/]] ${GEN_SRC_DIR}/locations.bison.h
+  COMMAND sed -E ${OPT_I} [[s/(YY_YY).*(_LOCATIONS_BISON_H)/\1\2/]] ${GEN_SRC_DIR}/calc1_locations.bison.h
   VERBATIM
 )
 

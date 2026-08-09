@@ -31,8 +31,8 @@
 // version 2.2 of Bison.
 
 /**
- ** \file ./calc1/flexbison.gen/locations.bison.h
- ** Define the calc1::location class.
+ ** \file ./calc2/flexbison.gen/calc2_locations.bison.h
+ ** Define the calc2::location class.
  */
 
 #ifndef YY_YY_LOCATIONS_BISON_H_INCLUDED
@@ -53,9 +53,9 @@
 #  endif
 # endif
 
-#line 127 "./calc1/grammar/calc1_parser.bison.y"
-namespace calc1 {
-#line 59 "./calc1/flexbison.gen/locations.bison.h"
+#line 130 "./calc2/grammar/calc2_parser.bison.y"
+namespace calc2 {
+#line 59 "./calc2/flexbison.gen/calc2_locations.bison.h"
 
   /// A point in a source file.
   class position
@@ -299,8 +299,8 @@ namespace calc1 {
     return ostr;
   }
 
-#line 127 "./calc1/grammar/calc1_parser.bison.y"
-} // calc1
-#line 305 "./calc1/flexbison.gen/locations.bison.h"
+#line 130 "./calc2/grammar/calc2_parser.bison.y"
+} // calc2
+#line 305 "./calc2/flexbison.gen/calc2_locations.bison.h"
 
 #endif // !YY_YY_LOCATIONS_BISON_H_INCLUDED
