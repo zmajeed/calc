@@ -35,7 +35,7 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 156 "./calc1/grammar/calc1_parser.bison.y"
+#line 163 "./calc2/grammar/calc2_parser.bison.y"
 
 // % code top
 // appears as topmost code block in generated .cpp file just below gnu license
@@ -66,24 +66,24 @@ SOFTWARE.
 */
 
 
-#line 70 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 70 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
 
 // First part of user prologue.
-#line 187 "./calc1/grammar/calc1_parser.bison.y"
+#line 194 "./calc2/grammar/calc2_parser.bison.y"
 
 // %{ unnamed codeblock
 // goes at top of .cpp file after %code top, before namespace and parser class
 
 
-#line 80 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 80 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
 
-#include "calc1_parser.bison.h"
+#include "calc2_parser.bison.h"
 
 
 // Unqualified %code blocks.
-#line 193 "./calc1/grammar/calc1_parser.bison.y"
+#line 200 "./calc2/grammar/calc2_parser.bison.y"
 
 // %code
 // appears in generated .cpp file after #include of generated .h file and before parser namespace and class
@@ -97,13 +97,13 @@ namespace {
   const auto defaultInputName = "inputstream"s;
 }
 
-void calc1::Calc1Parser::error(const location& loc, const string& msg) {
+void calc2::Calc2Parser::error(const location& loc, const string& msg) {
   const auto [file, line, col] = loc.begin;
-  println("error at {}:{}.{}: {}", *file, line, col, msg);
+  bisonParam.error = { msg, (uint64_t)line, (uint64_t)col, *file };
 }
 
 
-#line 107 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 107 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
 
 #ifndef YY_
@@ -194,12 +194,12 @@ void calc1::Calc1Parser::error(const location& loc, const string& msg) {
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 123 "./calc1/grammar/calc1_parser.bison.y"
-namespace calc1 {
-#line 200 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 130 "./calc2/grammar/calc2_parser.bison.y"
+namespace calc2 {
+#line 200 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
   /// Build a parser object.
-  Calc1Parser::Calc1Parser (function<Calc1Parser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg)
+  Calc2Parser::Calc2Parser (function<Calc2Parser::symbol_type(LexParam&)> yylex_yyarg, BisonParam& bisonParam_yyarg, LexParam& lexParam_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
@@ -211,10 +211,10 @@ namespace calc1 {
       lexParam (lexParam_yyarg)
   {}
 
-  Calc1Parser::~Calc1Parser ()
+  Calc2Parser::~Calc2Parser ()
   {}
 
-  Calc1Parser::syntax_error::~syntax_error () YY_NOEXCEPT YY_NOTHROW
+  Calc2Parser::syntax_error::~syntax_error () YY_NOEXCEPT YY_NOTHROW
   {}
 
   /*---------.
@@ -224,33 +224,33 @@ namespace calc1 {
 
 
   // by_state.
-  Calc1Parser::by_state::by_state () YY_NOEXCEPT
+  Calc2Parser::by_state::by_state () YY_NOEXCEPT
     : state (empty_state)
   {}
 
-  Calc1Parser::by_state::by_state (const by_state& that) YY_NOEXCEPT
+  Calc2Parser::by_state::by_state (const by_state& that) YY_NOEXCEPT
     : state (that.state)
   {}
 
   void
-  Calc1Parser::by_state::clear () YY_NOEXCEPT
+  Calc2Parser::by_state::clear () YY_NOEXCEPT
   {
     state = empty_state;
   }
 
   void
-  Calc1Parser::by_state::move (by_state& that)
+  Calc2Parser::by_state::move (by_state& that)
   {
     state = that.state;
     that.clear ();
   }
 
-  Calc1Parser::by_state::by_state (state_type s) YY_NOEXCEPT
+  Calc2Parser::by_state::by_state (state_type s) YY_NOEXCEPT
     : state (s)
   {}
 
-  Calc1Parser::symbol_kind_type
-  Calc1Parser::by_state::kind () const YY_NOEXCEPT
+  Calc2Parser::symbol_kind_type
+  Calc2Parser::by_state::kind () const YY_NOEXCEPT
   {
     if (state == empty_state)
       return symbol_kind::S_YYEMPTY;
@@ -258,10 +258,10 @@ namespace calc1 {
       return YY_CAST (symbol_kind_type, yystos_[+state]);
   }
 
-  Calc1Parser::stack_symbol_type::stack_symbol_type ()
+  Calc2Parser::stack_symbol_type::stack_symbol_type ()
   {}
 
-  Calc1Parser::stack_symbol_type::stack_symbol_type (YY_RVREF (stack_symbol_type) that)
+  Calc2Parser::stack_symbol_type::stack_symbol_type (YY_RVREF (stack_symbol_type) that)
     : super_type (YY_MOVE (that.state), YY_MOVE (that.location))
   {
     switch (that.kind ())
@@ -291,7 +291,7 @@ namespace calc1 {
 #endif
   }
 
-  Calc1Parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
+  Calc2Parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
     : super_type (s, YY_MOVE (that.location))
   {
     switch (that.kind ())
@@ -320,8 +320,8 @@ namespace calc1 {
   }
 
 #if YY_CPLUSPLUS < 201103L
-  Calc1Parser::stack_symbol_type&
-  Calc1Parser::stack_symbol_type::operator= (const stack_symbol_type& that)
+  Calc2Parser::stack_symbol_type&
+  Calc2Parser::stack_symbol_type::operator= (const stack_symbol_type& that)
   {
     state = that.state;
     switch (that.kind ())
@@ -349,8 +349,8 @@ namespace calc1 {
     return *this;
   }
 
-  Calc1Parser::stack_symbol_type&
-  Calc1Parser::stack_symbol_type::operator= (stack_symbol_type& that)
+  Calc2Parser::stack_symbol_type&
+  Calc2Parser::stack_symbol_type::operator= (stack_symbol_type& that)
   {
     state = that.state;
     switch (that.kind ())
@@ -383,7 +383,7 @@ namespace calc1 {
 
   template <typename Base>
   void
-  Calc1Parser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const
+  Calc2Parser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const
   {
     if (yymsg)
       YY_SYMBOL_PRINT (yymsg, yysym);
@@ -392,7 +392,7 @@ namespace calc1 {
 #if YYDEBUG
   template <typename Base>
   void
-  Calc1Parser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
+  Calc2Parser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
   {
     std::ostream& yyoutput = yyo;
     YY_USE (yyoutput);
@@ -411,7 +411,7 @@ namespace calc1 {
 #endif
 
   void
-  Calc1Parser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
+  Calc2Parser::yypush_ (const char* m, YY_MOVE_REF (stack_symbol_type) sym)
   {
     if (m)
       YY_SYMBOL_PRINT (m, sym);
@@ -419,7 +419,7 @@ namespace calc1 {
   }
 
   void
-  Calc1Parser::yypush_ (const char* m, state_type s, YY_MOVE_REF (symbol_type) sym)
+  Calc2Parser::yypush_ (const char* m, state_type s, YY_MOVE_REF (symbol_type) sym)
   {
 #if 201103L <= YY_CPLUSPLUS
     yypush_ (m, stack_symbol_type (s, std::move (sym)));
@@ -430,40 +430,40 @@ namespace calc1 {
   }
 
   void
-  Calc1Parser::yypop_ (int n) YY_NOEXCEPT
+  Calc2Parser::yypop_ (int n) YY_NOEXCEPT
   {
     yystack_.pop (n);
   }
 
 #if YYDEBUG
   std::ostream&
-  Calc1Parser::debug_stream () const
+  Calc2Parser::debug_stream () const
   {
     return *yycdebug_;
   }
 
   void
-  Calc1Parser::set_debug_stream (std::ostream& o)
+  Calc2Parser::set_debug_stream (std::ostream& o)
   {
     yycdebug_ = &o;
   }
 
 
-  Calc1Parser::debug_level_type
-  Calc1Parser::debug_level () const
+  Calc2Parser::debug_level_type
+  Calc2Parser::debug_level () const
   {
     return yydebug_;
   }
 
   void
-  Calc1Parser::set_debug_level (debug_level_type l)
+  Calc2Parser::set_debug_level (debug_level_type l)
   {
     yydebug_ = l;
   }
 #endif // YYDEBUG
 
-  Calc1Parser::state_type
-  Calc1Parser::yy_lr_goto_state_ (state_type yystate, int yysym)
+  Calc2Parser::state_type
+  Calc2Parser::yy_lr_goto_state_ (state_type yystate, int yysym)
   {
     int yyr = yypgoto_[yysym - YYNTOKENS] + yystate;
     if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate)
@@ -473,25 +473,25 @@ namespace calc1 {
   }
 
   bool
-  Calc1Parser::yy_pact_value_is_default_ (int yyvalue) YY_NOEXCEPT
+  Calc2Parser::yy_pact_value_is_default_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yypact_ninf_;
   }
 
   bool
-  Calc1Parser::yy_table_value_is_error_ (int yyvalue) YY_NOEXCEPT
+  Calc2Parser::yy_table_value_is_error_ (int yyvalue) YY_NOEXCEPT
   {
     return yyvalue == yytable_ninf_;
   }
 
   int
-  Calc1Parser::operator() ()
+  Calc2Parser::operator() ()
   {
     return parse ();
   }
 
   int
-  Calc1Parser::parse ()
+  Calc2Parser::parse ()
   {
     int yyn;
     /// Length of the RHS of the rule being reduced.
@@ -518,7 +518,7 @@ namespace calc1 {
 
 
     // User initialization code.
-#line 213 "./calc1/grammar/calc1_parser.bison.y"
+#line 220 "./calc2/grammar/calc2_parser.bison.y"
 {
 // %initial-action codeblock
 // goes inside parse() function in .cpp, it's a separate brace-scoped block, anything declared here is local to this block and cannot be used anywhere else in parse()
@@ -534,7 +534,7 @@ namespace calc1 {
   }
 }
 
-#line 538 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 538 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
 
     /* Initialize the stack.  The initial state will be set in
@@ -685,41 +685,41 @@ namespace calc1 {
           switch (yyn)
             {
   case 2: // expr: assign_exprs
-#line 255 "./calc1/grammar/calc1_parser.bison.y"
+#line 262 "./calc2/grammar/calc2_parser.bison.y"
                {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
   bisonParam.expr = yylhs.value.as < int64_t > ();
 }
-#line 694 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 694 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 3: // expr: assign_exprs ";"
-#line 259 "./calc1/grammar/calc1_parser.bison.y"
+#line 266 "./calc2/grammar/calc2_parser.bison.y"
                    {
   yylhs.value.as < int64_t > () = yystack_[1].value.as < int64_t > ();
   bisonParam.expr = yylhs.value.as < int64_t > ();
 }
-#line 703 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 703 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 4: // assign_exprs: assign_expr
-#line 266 "./calc1/grammar/calc1_parser.bison.y"
+#line 273 "./calc2/grammar/calc2_parser.bison.y"
               {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 711 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 711 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 5: // assign_exprs: assign_exprs ";" assign_expr
-#line 269 "./calc1/grammar/calc1_parser.bison.y"
+#line 276 "./calc2/grammar/calc2_parser.bison.y"
                                {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 719 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 719 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 6: // assign_expr: IDENT "=" assign_expr
-#line 274 "./calc1/grammar/calc1_parser.bison.y"
+#line 281 "./calc2/grammar/calc2_parser.bison.y"
                              {
   if(!bisonParam.symtab.contains(yystack_[2].value.as < string > ())) {
     bisonParam.symtab[yystack_[2].value.as < string > ()] = 0;
@@ -727,118 +727,118 @@ namespace calc1 {
   bisonParam.symtab[yystack_[2].value.as < string > ()] = yystack_[0].value.as < int64_t > ();
   yylhs.value.as < int64_t > () = bisonParam.symtab[yystack_[2].value.as < string > ()];
 }
-#line 731 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 731 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 7: // assign_expr: add_expr
-#line 281 "./calc1/grammar/calc1_parser.bison.y"
+#line 288 "./calc2/grammar/calc2_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 739 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 739 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 8: // add_expr: term
-#line 286 "./calc1/grammar/calc1_parser.bison.y"
+#line 293 "./calc2/grammar/calc2_parser.bison.y"
        {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 747 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 747 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 9: // add_expr: add_expr "+" term
-#line 289 "./calc1/grammar/calc1_parser.bison.y"
+#line 296 "./calc2/grammar/calc2_parser.bison.y"
                     {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () + yystack_[0].value.as < int64_t > ();
 }
-#line 755 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 755 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 10: // add_expr: add_expr "-" term
-#line 292 "./calc1/grammar/calc1_parser.bison.y"
+#line 299 "./calc2/grammar/calc2_parser.bison.y"
                     {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () - yystack_[0].value.as < int64_t > ();
 }
-#line 763 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 763 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 11: // term: factor
-#line 297 "./calc1/grammar/calc1_parser.bison.y"
+#line 304 "./calc2/grammar/calc2_parser.bison.y"
          {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 771 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 771 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 12: // term: term "*" factor
-#line 300 "./calc1/grammar/calc1_parser.bison.y"
+#line 307 "./calc2/grammar/calc2_parser.bison.y"
                   {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () * yystack_[0].value.as < int64_t > ();
 }
-#line 779 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 779 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 13: // term: term "/" factor
-#line 303 "./calc1/grammar/calc1_parser.bison.y"
+#line 310 "./calc2/grammar/calc2_parser.bison.y"
                   {
   yylhs.value.as < int64_t > () = yystack_[2].value.as < int64_t > () / yystack_[0].value.as < int64_t > ();
 }
-#line 787 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 787 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 14: // factor: atom
-#line 308 "./calc1/grammar/calc1_parser.bison.y"
+#line 315 "./calc2/grammar/calc2_parser.bison.y"
        {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 795 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 795 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 15: // factor: "+" atom
-#line 311 "./calc1/grammar/calc1_parser.bison.y"
+#line 318 "./calc2/grammar/calc2_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 803 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 803 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 16: // factor: "-" atom
-#line 314 "./calc1/grammar/calc1_parser.bison.y"
+#line 321 "./calc2/grammar/calc2_parser.bison.y"
            {
   yylhs.value.as < int64_t > () = -1 * yystack_[0].value.as < int64_t > ();
 }
-#line 811 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 811 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 17: // atom: INT
-#line 319 "./calc1/grammar/calc1_parser.bison.y"
+#line 326 "./calc2/grammar/calc2_parser.bison.y"
       {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
-#line 819 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 819 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 18: // atom: IDENT
-#line 322 "./calc1/grammar/calc1_parser.bison.y"
+#line 329 "./calc2/grammar/calc2_parser.bison.y"
         {
   if(!bisonParam.symtab.contains(yystack_[0].value.as < string > ())) {
     bisonParam.symtab[yystack_[0].value.as < string > ()] = 0;
   }
   yylhs.value.as < int64_t > () = bisonParam.symtab[yystack_[0].value.as < string > ()];
 }
-#line 830 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 830 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
   case 19: // atom: "(" expr ")"
-#line 328 "./calc1/grammar/calc1_parser.bison.y"
+#line 335 "./calc2/grammar/calc2_parser.bison.y"
                {
   yylhs.value.as < int64_t > () = yystack_[1].value.as < int64_t > ();
 }
-#line 838 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 838 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
     break;
 
 
-#line 842 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 842 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
             default:
               break;
@@ -1011,13 +1011,13 @@ namespace calc1 {
   }
 
   void
-  Calc1Parser::error (const syntax_error& yyexc)
+  Calc2Parser::error (const syntax_error& yyexc)
   {
     error (yyexc.location, yyexc.what ());
   }
 
   const char *
-  Calc1Parser::symbol_name (symbol_kind_type yysymbol)
+  Calc2Parser::symbol_name (symbol_kind_type yysymbol)
   {
     static const char *const yy_sname[] =
     {
@@ -1030,14 +1030,14 @@ namespace calc1 {
 
 
 
-  // Calc1Parser::context.
-  Calc1Parser::context::context (const Calc1Parser& yyparser, const symbol_type& yyla)
+  // Calc2Parser::context.
+  Calc2Parser::context::context (const Calc2Parser& yyparser, const symbol_type& yyla)
     : yyparser_ (yyparser)
     , yyla_ (yyla)
   {}
 
   int
-  Calc1Parser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
+  Calc2Parser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
   {
     // Actual number of expected tokens
     int yycount = 0;
@@ -1076,7 +1076,7 @@ namespace calc1 {
 
 
   int
-  Calc1Parser::yy_syntax_error_arguments_ (const context& yyctx,
+  Calc2Parser::yy_syntax_error_arguments_ (const context& yyctx,
                                                  symbol_kind_type yyarg[], int yyargn) const
   {
     /* There are many possibilities here to consider:
@@ -1116,7 +1116,7 @@ namespace calc1 {
 
   // Generate an error message.
   std::string
-  Calc1Parser::yysyntax_error_ (const context& yyctx) const
+  Calc2Parser::yysyntax_error_ (const context& yyctx) const
   {
     // Its maximum.
     enum { YYARGS_MAX = 5 };
@@ -1156,12 +1156,12 @@ namespace calc1 {
   }
 
 
-  const signed char Calc1Parser::yypact_ninf_ = -6;
+  const signed char Calc2Parser::yypact_ninf_ = -6;
 
-  const signed char Calc1Parser::yytable_ninf_ = -1;
+  const signed char Calc2Parser::yytable_ninf_ = -1;
 
   const signed char
-  Calc1Parser::yypact_[] =
+  Calc2Parser::yypact_[] =
   {
       -5,    -5,     3,     3,    12,    -6,    20,    14,    -6,     6,
        8,    -6,    -6,    21,    -6,    -6,    -6,    -5,    -6,    -5,
@@ -1170,7 +1170,7 @@ namespace calc1 {
   };
 
   const signed char
-  Calc1Parser::yydefact_[] =
+  Calc2Parser::yydefact_[] =
   {
        0,     0,     0,     0,    18,    17,     0,     2,     4,     7,
        8,    11,    14,     0,    18,    16,    15,     0,     1,     3,
@@ -1179,19 +1179,19 @@ namespace calc1 {
   };
 
   const signed char
-  Calc1Parser::yypgoto_[] =
+  Calc2Parser::yypgoto_[] =
   {
       -6,    27,    -6,     0,    -6,     1,     2,    24
   };
 
   const signed char
-  Calc1Parser::yydefgoto_[] =
+  Calc2Parser::yydefgoto_[] =
   {
        0,     6,     7,     8,     9,    10,    11,    12
   };
 
   const signed char
-  Calc1Parser::yytable_[] =
+  Calc2Parser::yytable_[] =
   {
        1,     2,     3,     1,     2,     3,     4,     5,     1,    14,
        5,    22,    20,    21,    14,     5,    17,    25,    23,    26,
@@ -1199,7 +1199,7 @@ namespace calc1 {
   };
 
   const signed char
-  Calc1Parser::yycheck_[] =
+  Calc2Parser::yycheck_[] =
   {
        5,     6,     7,     5,     6,     7,    11,    12,     5,    11,
       12,     3,     6,     7,    11,    12,     4,    17,    10,    19,
@@ -1207,7 +1207,7 @@ namespace calc1 {
   };
 
   const signed char
-  Calc1Parser::yystos_[] =
+  Calc2Parser::yystos_[] =
   {
        0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
       18,    19,    20,    14,    11,    20,    20,     4,     0,     9,
@@ -1216,14 +1216,14 @@ namespace calc1 {
   };
 
   const signed char
-  Calc1Parser::yyr1_[] =
+  Calc2Parser::yyr1_[] =
   {
        0,    13,    14,    14,    15,    15,    16,    16,    17,    17,
       17,    18,    18,    18,    19,    19,    19,    20,    20,    20
   };
 
   const signed char
-  Calc1Parser::yyr2_[] =
+  Calc2Parser::yyr2_[] =
   {
        0,     2,     1,     2,     1,     3,     3,     1,     1,     3,
        3,     1,     3,     3,     1,     2,     2,     1,     1,     3
@@ -1234,14 +1234,14 @@ namespace calc1 {
 
 #if YYDEBUG
   const short
-  Calc1Parser::yyrline_[] =
+  Calc2Parser::yyrline_[] =
   {
-       0,   255,   255,   259,   266,   269,   274,   281,   286,   289,
-     292,   297,   300,   303,   308,   311,   314,   319,   322,   328
+       0,   262,   262,   266,   273,   276,   281,   288,   293,   296,
+     299,   304,   307,   310,   315,   318,   321,   326,   329,   335
   };
 
   void
-  Calc1Parser::yy_stack_print_ () const
+  Calc2Parser::yy_stack_print_ () const
   {
     *yycdebug_ << "Stack now";
     for (stack_type::const_iterator
@@ -1253,7 +1253,7 @@ namespace calc1 {
   }
 
   void
-  Calc1Parser::yy_reduce_print_ (int yyrule) const
+  Calc2Parser::yy_reduce_print_ (int yyrule) const
   {
     int yylno = yyrline_[yyrule];
     int yynrhs = yyr2_[yyrule];
@@ -1268,11 +1268,11 @@ namespace calc1 {
 #endif // YYDEBUG
 
 
-#line 123 "./calc1/grammar/calc1_parser.bison.y"
-} // calc1
-#line 1274 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
+#line 130 "./calc2/grammar/calc2_parser.bison.y"
+} // calc2
+#line 1274 "./calc2/flexbison.gen/calc2_parser.bison.cpp"
 
-#line 332 "./calc1/grammar/calc1_parser.bison.y"
+#line 339 "./calc2/grammar/calc2_parser.bison.y"
 
 // %code epilog block
 // goes at bottom of generated .cpp file after namespace and parser implementation

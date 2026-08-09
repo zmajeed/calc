@@ -1,4 +1,4 @@
-// parser/calc1_parser.cpp
+// parser/calc2_parser.cpp
 
 /*
 MIT License
@@ -24,14 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "lexer/calc1_lexer.h"
-#include "calc1_parser.bison.h"
+#include "api/calc2_api.h"
 
 #include <stdlib.h>
 #include <getopt.h>
 
 #include <string>
-#include <vector>
 #include <memory>
 #include <iostream>
 #include <istream>
@@ -40,17 +38,14 @@ SOFTWARE.
 #include <chrono>
 #include <variant>
 #include <utility>
-#include <ranges>
-#include <algorithm>
-#include <map>
 
 using namespace std;
 using namespace chrono;
 
-using namespace calc1;
+using namespace calc2;
 
 void usage() {
-  println("Usage: calc1 [-h | --help] [--debug] [--stats] [-e expr] [file]");
+  println("Usage: calc2 [-h | --help] [--debug] [--stats] [-e expr] [file]");
   println("Simple arithmetic expressions parser");
   println("Prints nothing if parse succeeds, otherwise prints an error message with line number");
   println("");
@@ -58,7 +53,7 @@ void usage() {
   println("-e: arithmetic expression, only one of -e or file argument is allowed");
   println("--debug: turns on Bison parser and Flex lexer debug traces, off by default");
   println("--stats: print timing stats on successful parse");
-  println("--symbols: print symbol table");
+  println("--symtab: print symbol table");
   println("--help | -h: prints usage help");
 }
 
@@ -104,10 +99,7 @@ int main(int argc, char* argv[])
     exit(1);
   }
 
-  Calc1Lexer lexer;
-
-// input stream must remain valid for lifetime of lexer
-  variant<monostate, istringstream, ifstream> instrm;
+  Calc2 calc;
 
 // input can be string or exactly one file or keep default stdin
   if(!evalStr.empty()) {
@@ -117,66 +109,29 @@ int main(int argc, char* argv[])
       exit(1);
     }
 
-    instrm.emplace<istringstream>(evalStr);
-    lexer.switch_streams(get_if<istringstream>(&instrm));
-    *inputName = "string";
+    calc = Calc2::parseString(evalStr, { .debug = debug != 0 });
 
   } else if(optind + 1 == argc) {
 
-    const char* filename = argv[optind];
-    ifstream filestrm;
-    if(filename != "-"sv) {
-      if(filestrm.open(filename); !filestrm) {
-        println(stderr, "error opening file \"{}\"", filename);
-        exit(1);
-      }
-    }
-    instrm = move(filestrm);
-    lexer.switch_streams(get_if<ifstream>(&instrm));
-    *inputName = filename;
+    calc = Calc2::parseFile(argv[optind], { .debug = debug != 0 });
   }
 
-  BisonParam bisonParam;
-  LexParam lexParam{.loc = location(inputName.get())};
-
-  duration<double> lexSec{};
-
-  Calc1Parser parser(
-    [&lexer, &lexSec](LexParam& lexParam) -> Calc1Parser::symbol_type {
-      time_point<steady_clock> start = steady_clock::now();
-      auto token = lexer.yylex(lexParam);
-      time_point<steady_clock> end = steady_clock::now();
-      lexSec += end - start;
-      return token;
-    },
-    bisonParam,
-    lexParam
-  );
-
-  lexer.set_debug(debug);
-  parser.set_debug_level(debug);
-
-  time_point<steady_clock> parseStart = steady_clock::now();
-  auto ev = parser();
-  time_point<steady_clock> parseEnd = steady_clock::now();
-
-  if(ev != 0) {
+  if(calc.hasError()) {
     println(stderr, "parse failed");
-    return ev;
+    return calc.errorCode();
   }
 
-  println("{}", bisonParam.expr);
+  println("{}", calc.eval().value_or(0));
 
-  if(printStats == 1) {
-    duration<double> parseSec = parseEnd - parseStart;
+  if(printStats) {
+    auto [parseSec, lexSec, _, __] = calc.stats;
     println("parse time: {:.9f} sec", parseSec.count());
     println("lex time {:.9f} sec", lexSec.count());
   }
 
   if(printSymbols == 1) {
     println("symbols:");
-    auto syms = map(bisonParam.symtab.begin(), bisonParam.symtab.end());
-    for(const auto& [sym, val]: syms) {
+    for(const auto& [sym, val]: calc.symtab) {
       println("{}: {}", sym, val);
     }
   }

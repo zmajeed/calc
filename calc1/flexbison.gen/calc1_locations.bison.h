@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /mnt/c/work/git/zmajeedforks/calc/gitbranches/zmajeed_general/build/linux-clang-debug/calc1/grammar/calc1_locations.bison.h
+ ** \file ./calc1/flexbison.gen/calc1_locations.bison.h
  ** Define the calc1::location class.
  */
 
-#ifndef YY_YY_MNT_C_WORK_GIT_ZMAJEEDFORKS_CALC_GITBRANCHES_ZMAJEED_GENERAL_BUILD_LINUX_CLANG_DEBUG_CALC1_GRAMMAR_CALC1_LOCATIONS_BISON_H_INCLUDED
-# define YY_YY_MNT_C_WORK_GIT_ZMAJEEDFORKS_CALC_GITBRANCHES_ZMAJEED_GENERAL_BUILD_LINUX_CLANG_DEBUG_CALC1_GRAMMAR_CALC1_LOCATIONS_BISON_H_INCLUDED
+#ifndef YY_YY_LOCATIONS_BISON_H_INCLUDED
+# define YY_YY_LOCATIONS_BISON_H_INCLUDED
 
 # include <iostream>
 # include <string>
@@ -53,9 +53,9 @@
 #  endif
 # endif
 
-#line 139 "/mnt/c/work/git/zmajeedforks/calc/gitbranches/zmajeed_general/calc1/grammar/calc1_parser.bison.y"
+#line 123 "./calc1/grammar/calc1_parser.bison.y"
 namespace calc1 {
-#line 59 "/mnt/c/work/git/zmajeedforks/calc/gitbranches/zmajeed_general/build/linux-clang-debug/calc1/grammar/calc1_locations.bison.h"
+#line 59 "./calc1/flexbison.gen/calc1_locations.bison.h"
 
   /// A point in a source file.
   class position
@@ -299,8 +299,8 @@ namespace calc1 {
     return ostr;
   }
 
-#line 139 "/mnt/c/work/git/zmajeedforks/calc/gitbranches/zmajeed_general/calc1/grammar/calc1_parser.bison.y"
+#line 123 "./calc1/grammar/calc1_parser.bison.y"
 } // calc1
-#line 305 "/mnt/c/work/git/zmajeedforks/calc/gitbranches/zmajeed_general/build/linux-clang-debug/calc1/grammar/calc1_locations.bison.h"
+#line 305 "./calc1/flexbison.gen/calc1_locations.bison.h"
 
-#endif // !YY_YY_MNT_C_WORK_GIT_ZMAJEEDFORKS_CALC_GITBRANCHES_ZMAJEED_GENERAL_BUILD_LINUX_CLANG_DEBUG_CALC1_GRAMMAR_CALC1_LOCATIONS_BISON_H_INCLUDED
+#endif // !YY_YY_LOCATIONS_BISON_H_INCLUDED
