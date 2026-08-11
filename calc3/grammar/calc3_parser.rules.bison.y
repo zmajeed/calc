@@ -1,0 +1,43 @@
+// calc3_parser.rules.bison.y
+
+// calc grammar without clutter of semantic actions
+// bison --color=always -Wall -Wdangling-alias -Werror -Wcounterexamples --report counterexamples,lookaheads --report-file bisonreport.txt calc3_parser.rules.bison.y
+
+%{
+// %{ unnamed codeblock
+// goes at top of .cpp file after %code top, before namespace and parser class
+
+%}
+
+%token DIV                  "/"
+%token EQUAL                "="
+%token LEFT_PAREN           "("
+%token MINUS                "-"
+%token PLUS                 "+"
+%token RIGHT_PAREN          ")"
+%token SEMICOLON            ";"
+%token TIMES                "*"
+
+%token                      IDENT
+%token                      INT
+
+%start expr
+
+%%
+
+expr: assign_exprs | assign_exprs ";"
+
+assign_exprs: assign_expr | assign_exprs ";" assign_expr
+
+assign_expr: IDENT "=" assign_expr | add_expr
+
+add_expr: term | add_expr "+" term | add_expr "-" term
+
+term: factor | term "*" factor | term "/" factor
+
+factor: atom | "+" factor | "-" factor
+
+atom: INT | IDENT | "(" expr ")"
+
+
+
