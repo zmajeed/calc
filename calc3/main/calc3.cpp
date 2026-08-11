@@ -39,6 +39,8 @@ SOFTWARE.
 #include <variant>
 #include <utility>
 
+#include "isocline.h"
+
 using namespace std;
 using namespace chrono;
 
@@ -52,9 +54,45 @@ void usage() {
   println("Options:");
   println("-e: arithmetic expression, only one of -e or file argument is allowed");
   println("--debug: turns on Bison parser and Flex lexer debug traces, off by default");
+  println("-i | --interactive: launch interactive REPL");
   println("--stats: print timing stats on successful parse");
-  println("--symtab: print symbol table");
+  println("--symbols: print symbol table");
   println("--help | -h: prints usage help");
+}
+
+
+void runInteractive() {
+
+  ic_set_history("calc3_history.txt", -1);
+
+  EvalContext ctx;
+
+  char* input = nullptr;
+  while((input = ic_readline("calc3")) != nullptr) {
+    string line(input);
+    ic_free(input);
+
+    if(line.empty()) {
+      continue;
+    }
+    if(line == "exit" || line == "quit") {
+      break;
+    }
+
+    Calc3 calc = Calc3::parseString(line);
+
+    auto result = calc.eval(ctx);
+
+    if(!result) {
+      println("{}", calc.errorStr());
+      continue;
+    }
+
+    println("{}", result.value());
+
+    ic_history_add(line.c_str());
+  }
+
 }
 
 int main(int argc, char* argv[])
@@ -62,6 +100,7 @@ int main(int argc, char* argv[])
   int debug = 0;
   int printStats = 0;
   int printSymbols = 0;
+  int interactive = 0;
   string evalStr;
   
 
@@ -70,18 +109,22 @@ int main(int argc, char* argv[])
 
   option opts[] = {
     {"debug", no_argument, &debug, 1},
+    {"interactive", no_argument, &interactive, 1},
     {"stats", no_argument, &printStats, 1},
     {"symbols", no_argument, &printSymbols, 1},
     {"help", no_argument, 0, 'h'},
     {0, 0, 0, 0}
   };
 
-  for(int i, optLetter; (optLetter = getopt_long(argc, argv, "e:h", opts, &i)) != -1;) {
+  for(int i, optLetter; (optLetter = getopt_long(argc, argv, "e:hi", opts, &i)) != -1;) {
     switch(optLetter) {
     case 0:
       break;
     case 'e':
       evalStr = optarg;
+      break;
+    case 'i':
+      interactive = 1;
       break;
     case 'h':
       usage();
@@ -97,6 +140,11 @@ int main(int argc, char* argv[])
   if(optind > argc || optind + 1 < argc) {
     usage();
     exit(1);
+  }
+
+  if(interactive) {
+    runInteractive();
+    return 0;
   }
 
   Calc3 calc;

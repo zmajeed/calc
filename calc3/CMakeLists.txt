@@ -24,6 +24,22 @@ if(WIN32 OR CMAKE_CXX_COMPILER_ID STREQUAL Clang)
 
 endif()
 
+FetchContent_Declare(
+  isocline
+  GIT_REPOSITORY https://github.com/daanx/isocline
+  GIT_TAG main
+  GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(isocline)
+
+execute_process(
+  COMMAND bash -c "git log -1 --pretty=format:\"%h %cd %s\n\" --date=format-local:%F_%T_%Z; git remote -v | head -1; git branch"
+  WORKING_DIRECTORY ${isocline_SOURCE_DIR}
+  OUTPUT_VARIABLE cmdout
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message(STATUS "isocline source:\n${cmdout}")
+
 # don't run bison, flex for windows and webassembly builds
 if(WIN32 OR EMSCRIPTEN)
   message("Use checked-in pre-generated calc3 bison, flex files from flexbison.gen directory")
