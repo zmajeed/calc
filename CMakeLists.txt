@@ -15,7 +15,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 execute_process(
-  COMMAND bash -c "git log -1 --oneline; git remote -v | head -1; git branch"
+  COMMAND bash -c "git log -1 --pretty=format:\"%h %cd %s\n\" --date=format-local:%F_%T_%Z; git remote -v | head -1; git branch"
   WORKING_DIRECTORY ${googletest_SOURCE_DIR}
   OUTPUT_VARIABLE cmdout
   OUTPUT_STRIP_TRAILING_WHITESPACE

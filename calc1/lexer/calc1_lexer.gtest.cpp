@@ -38,7 +38,7 @@ using namespace ::testing;
 
 namespace calc1::testing {
 
-TEST(Calc1Lexer, test_0000) {
+TEST(Calc1Lexer, test_00) {
 
   stringstream s("5");
   Calc1Lexer lexer(s);
@@ -50,7 +50,7 @@ TEST(Calc1Lexer, test_0000) {
   EXPECT_EQ(token.value.as<int64_t>(), 5);
 }
 
-TEST(Calc1Lexer, test_0001) {
+TEST(Calc1Lexer, test_01) {
 
   stringstream s("x");
   Calc1Lexer lexer(s);
@@ -62,7 +62,7 @@ TEST(Calc1Lexer, test_0001) {
   EXPECT_EQ(token.value.as<string>(), "x");
 }
 
-TEST(Calc1Lexer, test_0002) {
+TEST(Calc1Lexer, test_02) {
 
   stringstream s("2 + 3");
   Calc1Lexer lexer(s);
@@ -86,7 +86,7 @@ TEST(Calc1Lexer, test_0002) {
 
 }
 
-TEST(Calc1Lexer, test_0003) {
+TEST(Calc1Lexer, test_03) {
 
   stringstream s("2 + -3");
   Calc1Lexer lexer(s);
@@ -110,7 +110,7 @@ TEST(Calc1Lexer, test_0003) {
 
 }
 
-TEST(Calc1Lexer, test_0004) {
+TEST(Calc1Lexer, test_04) {
 
   stringstream s("val1 = 2; val2 = -val1+val3");
   Calc1Lexer lexer(s);

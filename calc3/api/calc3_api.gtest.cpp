@@ -49,7 +49,7 @@ void PrintTo(const Error& e, ostream* os) {
 
 namespace calc3::testing {
 
-TEST(Calc3Api, test_000) {
+TEST(Calc3Api, test_00) {
 
   stringstream s("2 + 3");
   auto calc = Calc3::parse(s);
@@ -58,7 +58,7 @@ TEST(Calc3Api, test_000) {
   EXPECT_EQ(calc.eval().value_or(0), 5);
 }
 
-TEST(Calc3Api, test_001) {
+TEST(Calc3Api, test_01) {
 
   string s = "2 + 3";
   auto calc = Calc3::parseString(s);
@@ -67,7 +67,7 @@ TEST(Calc3Api, test_001) {
   EXPECT_EQ(calc.eval().value_or(0), 5);
 }
 
-TEST(Calc3Api, test_002) {
+TEST(Calc3Api, test_02) {
 
   string s = "2 + ";
   auto calc = Calc3::parseString(s);

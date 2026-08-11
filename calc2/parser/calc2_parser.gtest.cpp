@@ -39,7 +39,7 @@ using namespace ::testing;
 
 namespace calc2::testing {
 
-TEST(Calc2_BisonNoFlex, test_0000) {
+TEST(Calc2_BisonNoFlex, test_00) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -63,7 +63,7 @@ TEST(Calc2_BisonNoFlex, test_0000) {
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(Calc2_BisonNoFlex, test_0001) {
+TEST(Calc2_BisonNoFlex, test_01) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -90,7 +90,7 @@ TEST(Calc2_BisonNoFlex, test_0001) {
   EXPECT_EQ(bisonParam.expr, 15);
 }
 
-TEST(Calc2_BisonNoFlex, test_0002) {
+TEST(Calc2_BisonNoFlex, test_02) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -119,7 +119,7 @@ TEST(Calc2_BisonNoFlex, test_0002) {
   EXPECT_EQ(bisonParam.expr, 38);
 }
 
-TEST(Calc2_BisonNoFlex, test_0003) {
+TEST(Calc2_BisonNoFlex, test_03) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -148,7 +148,7 @@ TEST(Calc2_BisonNoFlex, test_0003) {
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(Calc2_BisonNoFlex, test_0004) {
+TEST(Calc2_BisonNoFlex, test_04) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -175,7 +175,7 @@ TEST(Calc2_BisonNoFlex, test_0004) {
   EXPECT_EQ(bisonParam.expr, 7);
 }
 
-TEST(Calc2_BisonNoFlex, test_0005) {
+TEST(Calc2_BisonNoFlex, test_05) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -205,7 +205,7 @@ TEST(Calc2_BisonNoFlex, test_0005) {
   EXPECT_EQ(bisonParam.symtab["x"], 8);
 }
 
-TEST(Calc2_BisonNoFlex, test_0006) {
+TEST(Calc2_BisonNoFlex, test_06) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -236,7 +236,7 @@ TEST(Calc2_BisonNoFlex, test_0006) {
   EXPECT_EQ(bisonParam.symtab["y"], 7);
 }
 
-TEST(Calc2_BisonNoFlex, test_0007) {
+TEST(Calc2_BisonNoFlex, test_07) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -271,7 +271,7 @@ TEST(Calc2_BisonNoFlex, test_0007) {
   EXPECT_EQ(bisonParam.symtab["y"], 12);
 }
 
-TEST(Calc2_BisonNoFlex, test_0008) {
+TEST(Calc2_BisonNoFlex, test_08) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -309,7 +309,7 @@ TEST(Calc2_BisonNoFlex, test_0008) {
   EXPECT_EQ(bisonParam.symtab["x"], 16);
 }
 
-TEST(Calc2_Bison, test_0000) {
+TEST(Calc2_Bison, test_00) {
 
   stringstream s("2 + 3");
   Calc2Lexer lexer(s);
@@ -326,7 +326,7 @@ TEST(Calc2_Bison, test_0000) {
   EXPECT_EQ(bisonParam.expr, 5);
 }
 
-TEST(Calc2_Bison, test_0001) {
+TEST(Calc2_Bison, test_01) {
 
   stringstream s("2 - 7");
   Calc2Lexer lexer(s);
@@ -343,7 +343,7 @@ TEST(Calc2_Bison, test_0001) {
   EXPECT_EQ(bisonParam.expr, -5);
 }
 
-TEST(Calc2_Bison, test_0002) {
+TEST(Calc2_Bison, test_02) {
 
   stringstream s("-2 + -7");
   Calc2Lexer lexer(s);
@@ -360,7 +360,7 @@ TEST(Calc2_Bison, test_0002) {
   EXPECT_EQ(bisonParam.expr, -9);
 }
 
-TEST(Calc2_Bison, test_0003) {
+TEST(Calc2_Bison, test_03) {
 
   stringstream s("a = b = c = 10");
   Calc2Lexer lexer(s);
@@ -380,7 +380,7 @@ TEST(Calc2_Bison, test_0003) {
   EXPECT_EQ(bisonParam.symtab["c"], 10);
 }
 
-TEST(Calc2_Bison, test_0004) {
+TEST(Calc2_Bison, test_04) {
 
   stringstream s(R"%(
 a = 3; b = 5;
@@ -406,7 +406,7 @@ x = a + b * c;
   EXPECT_EQ(bisonParam.symtab["c"], 7);
 }
 
-TEST(Calc2_Bison, test_0005) {
+TEST(Calc2_Bison, test_05) {
 
   stringstream s(R"%(
 a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
@@ -426,7 +426,7 @@ a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(Calc2_Bison, test_0006) {
+TEST(Calc2_Bison, test_06) {
 
   stringstream s(R"%(
 100 / 10 / 2
@@ -445,7 +445,7 @@ TEST(Calc2_Bison, test_0006) {
   EXPECT_EQ(bisonParam.expr, 5);
 }
 
-TEST(Calc2_Bison, test_0007) {
+TEST(Calc2_Bison, test_07) {
 
   stringstream s(R"%(
 (a) = 5;
@@ -463,7 +463,7 @@ TEST(Calc2_Bison, test_0007) {
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc2_Bison, test_0008) {
+TEST(Calc2_Bison, test_08) {
 
   stringstream s(R"%(
 a = b * / c
@@ -481,7 +481,7 @@ a = b * / c
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc2_Bison, test_0009) {
+TEST(Calc2_Bison, test_09) {
 
   stringstream s(R"%(
 a + b = c
@@ -499,7 +499,7 @@ a + b = c
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc2_Bison, test_0010) {
+TEST(Calc2_Bison, test_10) {
 
   stringstream s(R"%(
 a = 7; b = 3; c = -5;
@@ -520,7 +520,7 @@ a + (b = c)
   EXPECT_EQ(bisonParam.symtab["b"], -5);
 }
 
-TEST(Calc2_Bison, test_0011) {
+TEST(Calc2_Bison, test_11) {
 
   stringstream s(R"%(
 a = 7; b = 3; c = -5;
@@ -541,7 +541,7 @@ a = -b * -c
   EXPECT_EQ(bisonParam.symtab["a"], -15);
 }
 
-TEST(Calc2_Bison, test_0012) {
+TEST(Calc2_Bison, test_12) {
 
   stringstream s(R"%(
 c = 3;

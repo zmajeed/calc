@@ -41,7 +41,7 @@ using namespace ::testing;
 
 namespace calc3::testing {
 
-TEST(Calc3_BisonNoFlex, test_0000) {
+TEST(Calc3_BisonNoFlex, test_00) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -67,7 +67,7 @@ TEST(Calc3_BisonNoFlex, test_0000) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_0001) {
+TEST(Calc3_BisonNoFlex, test_01) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -95,7 +95,7 @@ TEST(Calc3_BisonNoFlex, test_0001) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_0002) {
+TEST(Calc3_BisonNoFlex, test_02) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -125,7 +125,7 @@ TEST(Calc3_BisonNoFlex, test_0002) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_0003) {
+TEST(Calc3_BisonNoFlex, test_03) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -155,7 +155,7 @@ TEST(Calc3_BisonNoFlex, test_0003) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_0004) {
+TEST(Calc3_BisonNoFlex, test_04) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -183,7 +183,7 @@ TEST(Calc3_BisonNoFlex, test_0004) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_0005) {
+TEST(Calc3_BisonNoFlex, test_05) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -215,7 +215,7 @@ TEST(Calc3_BisonNoFlex, test_0005) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("x"));
 }
 
-TEST(Calc3_BisonNoFlex, test_0006) {
+TEST(Calc3_BisonNoFlex, test_06) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -248,7 +248,7 @@ TEST(Calc3_BisonNoFlex, test_0006) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("y"));
 }
 
-TEST(Calc3_BisonNoFlex, test_0007) {
+TEST(Calc3_BisonNoFlex, test_07) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -285,7 +285,7 @@ TEST(Calc3_BisonNoFlex, test_0007) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("y"));
 }
 
-TEST(Calc3_BisonNoFlex, test_0008) {
+TEST(Calc3_BisonNoFlex, test_08) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -325,7 +325,7 @@ TEST(Calc3_BisonNoFlex, test_0008) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("x"));
 }
 
-TEST(Calc3_Bison, test_0000) {
+TEST(Calc3_Bison, test_00) {
 
   stringstream s("2 + 3");
   Calc3Lexer lexer(s);
@@ -343,7 +343,7 @@ TEST(Calc3_Bison, test_0000) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_Bison, test_0001) {
+TEST(Calc3_Bison, test_01) {
 
   stringstream s("2 - 7");
   Calc3Lexer lexer(s);
@@ -361,7 +361,7 @@ TEST(Calc3_Bison, test_0001) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_Bison, test_0002) {
+TEST(Calc3_Bison, test_02) {
 
   stringstream s("-2 + -7");
   Calc3Lexer lexer(s);
@@ -379,7 +379,7 @@ TEST(Calc3_Bison, test_0002) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_Bison, test_0003) {
+TEST(Calc3_Bison, test_03) {
 
   stringstream s("a = b = c = 10");
   Calc3Lexer lexer(s);
@@ -401,7 +401,7 @@ TEST(Calc3_Bison, test_0003) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("c"));
 }
 
-TEST(Calc3_Bison, test_0004) {
+TEST(Calc3_Bison, test_04) {
 
   stringstream s(R"%(
 a = 3; b = 5;
@@ -429,7 +429,7 @@ x = a + b * c;
   EXPECT_TRUE(bisonParam.driver.symtab.contains("c"));
 }
 
-TEST(Calc3_Bison, test_0005) {
+TEST(Calc3_Bison, test_05) {
 
   stringstream s(R"%(
 a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
@@ -450,7 +450,7 @@ a = 1; b = 2; c = 9; d = 4; e = 2; f = 3;
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 7);
 }
 
-TEST(Calc3_Bison, test_0006) {
+TEST(Calc3_Bison, test_06) {
 
   stringstream s(R"%(
 100 / 10 / 2
@@ -470,7 +470,7 @@ TEST(Calc3_Bison, test_0006) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_Bison, test_0007) {
+TEST(Calc3_Bison, test_07) {
 
   stringstream s(R"%(
 (a) = 5;
@@ -489,7 +489,7 @@ TEST(Calc3_Bison, test_0007) {
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc3_Bison, test_0008) {
+TEST(Calc3_Bison, test_08) {
 
   stringstream s(R"%(
 a = b * / c
@@ -508,7 +508,7 @@ a = b * / c
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc3_Bison, test_0009) {
+TEST(Calc3_Bison, test_09) {
 
   stringstream s(R"%(
 a + b = c
@@ -527,7 +527,7 @@ a + b = c
   EXPECT_NE(parser(), 0);
 }
 
-TEST(Calc3_Bison, test_0010) {
+TEST(Calc3_Bison, test_10) {
 
   stringstream s(R"%(
 a = 7; b = 3; c = -5;
@@ -550,7 +550,7 @@ a + (b = c)
   EXPECT_TRUE(bisonParam.driver.symtab.contains("b"));
 }
 
-TEST(Calc3_Bison, test_0011) {
+TEST(Calc3_Bison, test_11) {
 
   stringstream s(R"%(
 a = 7; b = 3; c = -5;
@@ -573,7 +573,7 @@ a = -b * -c
   EXPECT_TRUE(bisonParam.driver.symtab.contains("a"));
 }
 
-TEST(Calc3_Bison, test_0012) {
+TEST(Calc3_Bison, test_12) {
 
   stringstream s(R"%(
 c = 3;
