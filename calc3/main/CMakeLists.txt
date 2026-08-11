@@ -21,8 +21,10 @@ target_compile_options(calc3 PRIVATE
   $<$<AND:$<CONFIG:release>,$<CXX_COMPILER_ID:Clang>>: -Og>
 )
 
-target_link_libraries(calc3 flexbisonlib.calc3)
-target_link_libraries(calc3 $<$<CXX_COMPILER_ID:MSVC>: getoptlib>)
+target_link_libraries(calc3 PRIVATE flexbisonlib.calc3 isocline)
+target_link_libraries(calc3 PRIVATE
+  $<$<CXX_COMPILER_ID:MSVC>: getoptlib>
+)
 
 # tests
 

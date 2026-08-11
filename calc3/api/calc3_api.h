@@ -150,6 +150,11 @@ struct Calc3 {
     return errInfo;
   }
 
+  string errorStr() {
+    const auto& [msg, line, col, file] = errInfo;
+    return format("{}:{}.{}: {}", file, line, col, msg);
+  }
+
 private:
 
 #if WIN32
