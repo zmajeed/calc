@@ -31,12 +31,7 @@ SOFTWARE.
 #include <string>
 #include <vector>
 #include <set>
-#include <flat_set>
-#include <flat_map>
-#include <initializer_list>
-#include <map>
 #include <variant>
-#include <compare>
 #include <utility>
 #include <algorithm>
 #include <memory>
@@ -56,13 +51,13 @@ using xyz::indirect;
 
 // ast node types
 
-struct AssignExpr;
-struct Expr;
 struct AddExpr;
-struct Term;
+struct AssignExpr;
+struct Atom;
+struct Expr;
 struct Factor;
 struct Group;
-struct Atom;
+struct Term;
 
 
 using Int = int64_t;

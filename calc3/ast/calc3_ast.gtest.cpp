@@ -28,9 +28,7 @@ SOFTWARE.
 
 #include <sstream>
 #include <string>
-#include <variant>
 #include <utility>
-#include <print>
 
 #include <gtest/gtest.h>
 
@@ -38,7 +36,7 @@ using namespace std;
 
 namespace calc3::testing {
 
-TEST(Calc3_Ast, test_000) {
+TEST(Calc3_Ast, test_00) {
 
 // x = 5
   Factor factor{Atom{5}};
@@ -49,9 +47,6 @@ TEST(Calc3_Ast, test_000) {
   AssignExpr axp3 = move(ass2);
   Expr expr;
   expr.assigns.push_back(move(axp3));
-
-  //EXPECT_EQ(Calc3AstNode{expr}.eval(), 5);
-
 }
 
 
