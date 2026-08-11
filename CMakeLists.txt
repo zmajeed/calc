@@ -27,4 +27,5 @@ enable_testing()
 add_subdirectory(thirdparty)
 add_subdirectory(calc1)
 add_subdirectory(calc2)
+add_subdirectory(calc3)
 
