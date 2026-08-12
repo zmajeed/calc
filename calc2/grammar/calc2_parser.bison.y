@@ -331,8 +331,8 @@ atom:
   }
   $$ = bisonParam.symtab[$IDENT];
 }
-| "(" expr ")" {
-  $$ = $expr;
+| "(" assign_expr ")" {
+  $$ = $assign_expr;
 }
 
 %%

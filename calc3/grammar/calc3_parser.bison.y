@@ -334,8 +334,8 @@ atom:
   }
   $$ = move($IDENT);
 }
-| "(" expr ")" {
-  $$ = Group{$expr};
+| "(" assign_expr ")" {
+  $$ = Group{ indirect<AssignExpr>{move($assign_expr)} };
 }
 
 %%
