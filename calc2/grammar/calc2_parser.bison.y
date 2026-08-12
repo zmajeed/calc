@@ -105,8 +105,8 @@ using namespace std;
 
 struct Error {
   string msg;
-  uint64_t line;
-  uint64_t col;
+  uint64_t line = 0;
+  uint64_t col = 0;
   string file;
 };
 

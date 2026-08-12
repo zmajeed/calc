@@ -114,10 +114,13 @@ int main(int argc, char* argv[])
   } else if(optind + 1 == argc) {
 
     calc = Calc2::parseFile(argv[optind], { .debug = debug != 0 });
+
+  } else {
+    calc = Calc2::parse(cin, { .debug = debug != 0 });
   }
 
   if(calc.hasError()) {
-    println(stderr, "parse failed");
+    println(stderr, "parse failed: {}", calc.errorStr());
     return calc.errorCode();
   }
 
