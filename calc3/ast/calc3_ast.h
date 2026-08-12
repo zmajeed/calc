@@ -80,6 +80,7 @@ struct Factor {
     plus,
     minus
   };
+
   Atom atom;
   vector<op> ops;
 };

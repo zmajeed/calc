@@ -130,10 +130,10 @@ int main(int argc, char* argv[])
         println(stderr, "error opening file \"{}\"", filename);
         exit(1);
       }
+      instrm = move(filestrm);
+      lexer.switch_streams(get_if<ifstream>(&instrm));
+      *inputName = filename;
     }
-    instrm = move(filestrm);
-    lexer.switch_streams(get_if<ifstream>(&instrm));
-    *inputName = filename;
   }
 
   BisonParam bisonParam;
