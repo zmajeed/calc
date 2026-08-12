@@ -901,56 +901,58 @@ namespace calc3 {
   case 14: // factor: atom
 #line 315 "./calc3/grammar/calc3_parser.bison.y"
        {
-  yylhs.value.as < Factor > () = {yystack_[0].value.as < Atom > (), Factor::op::none};
+  yylhs.value.as < Factor > () = { move(yystack_[0].value.as < Atom > ()), {Factor::op::none} };
 }
 #line 907 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 15: // factor: "+" atom
+  case 15: // factor: "+" factor
 #line 318 "./calc3/grammar/calc3_parser.bison.y"
-           {
-  yylhs.value.as < Factor > () = {yystack_[0].value.as < Atom > (), Factor::op::plus};
+                  {
+  yylhs.value.as < Factor > () = move(yystack_[0].value.as < Factor > ());
+  yylhs.value.as < Factor > ().ops.push_back(Factor::op::plus);
 }
-#line 915 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 916 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 16: // factor: "-" atom
-#line 321 "./calc3/grammar/calc3_parser.bison.y"
-           {
-  yylhs.value.as < Factor > () = {yystack_[0].value.as < Atom > (), Factor::op::minus};
+  case 16: // factor: "-" factor
+#line 322 "./calc3/grammar/calc3_parser.bison.y"
+                  {
+  yylhs.value.as < Factor > () = move(yystack_[0].value.as < Factor > ());
+  yylhs.value.as < Factor > ().ops.push_back(Factor::op::minus);
 }
-#line 923 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 925 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
   case 17: // atom: INT
-#line 326 "./calc3/grammar/calc3_parser.bison.y"
+#line 328 "./calc3/grammar/calc3_parser.bison.y"
       {
   yylhs.value.as < Atom > () = yystack_[0].value.as < int64_t > ();
 }
-#line 931 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 933 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
   case 18: // atom: IDENT
-#line 329 "./calc3/grammar/calc3_parser.bison.y"
+#line 331 "./calc3/grammar/calc3_parser.bison.y"
         {
   if(!bisonParam.driver.symtab.contains(yystack_[0].value.as < string > ())) {
     bisonParam.driver.symtab[yystack_[0].value.as < string > ()] = 0;
   }
   yylhs.value.as < Atom > () = move(yystack_[0].value.as < string > ());
 }
-#line 942 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 944 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
   case 19: // atom: "(" expr ")"
-#line 335 "./calc3/grammar/calc3_parser.bison.y"
+#line 337 "./calc3/grammar/calc3_parser.bison.y"
                {
   yylhs.value.as < Atom > () = Group{yystack_[1].value.as < Expr > ()};
 }
-#line 950 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 952 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
 
-#line 954 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 956 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
 
             default:
               break;
@@ -1268,17 +1270,17 @@ namespace calc3 {
   }
 
 
-  const signed char Calc3Parser::yypact_ninf_ = -6;
+  const signed char Calc3Parser::yypact_ninf_ = -5;
 
   const signed char Calc3Parser::yytable_ninf_ = -1;
 
   const signed char
   Calc3Parser::yypact_[] =
   {
-      -5,    -5,     3,     3,    12,    -6,    20,    14,    -6,     6,
-       8,    -6,    -6,    21,    -6,    -6,    -6,    -5,    -6,    -5,
-      -2,    -2,    -2,    -2,    -6,    -6,    -6,     8,     8,    -6,
-      -6
+      -3,    -3,     0,     0,    10,    -5,    16,    15,    -5,    12,
+       7,    -5,    -5,    17,    -5,    -5,    -5,    -3,    -5,    -3,
+       0,     0,     0,     0,    -5,    -5,    -5,     7,     7,    -5,
+      -5
   };
 
   const signed char
@@ -1293,7 +1295,7 @@ namespace calc3 {
   const signed char
   Calc3Parser::yypgoto_[] =
   {
-      -6,    27,    -6,     0,    -6,     1,     2,    24
+      -5,    25,    -5,    -4,    -5,     2,    -2,    -5
   };
 
   const signed char
@@ -1305,24 +1307,24 @@ namespace calc3 {
   const signed char
   Calc3Parser::yytable_[] =
   {
-       1,     2,     3,     1,     2,     3,     4,     5,     1,    14,
-       5,    22,    20,    21,    14,     5,    17,    25,    23,    26,
-      18,    27,    28,    19,    29,    30,    15,    16,    13,    24
+      15,    16,     1,     2,     3,     1,     2,     3,     4,     5,
+      22,    14,     5,    25,    17,    26,    18,    23,    20,    21,
+      29,    30,    27,    28,    19,    24,    13
   };
 
   const signed char
   Calc3Parser::yycheck_[] =
   {
-       5,     6,     7,     5,     6,     7,    11,    12,     5,    11,
-      12,     3,     6,     7,    11,    12,     4,    17,    10,    19,
-       0,    20,    21,     9,    22,    23,     2,     3,     1,     8
+       2,     3,     5,     6,     7,     5,     6,     7,    11,    12,
+       3,    11,    12,    17,     4,    19,     0,    10,     6,     7,
+      22,    23,    20,    21,     9,     8,     1
   };
 
   const signed char
   Calc3Parser::yystos_[] =
   {
        0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
-      18,    19,    20,    14,    11,    20,    20,     4,     0,     9,
+      18,    19,    20,    14,    11,    19,    19,     4,     0,     9,
        6,     7,     3,    10,     8,    16,    16,    18,    18,    19,
       19
   };
@@ -1349,7 +1351,7 @@ namespace calc3 {
   Calc3Parser::yyrline_[] =
   {
        0,   254,   254,   258,   265,   268,   274,   280,   285,   288,
-     293,   300,   303,   308,   315,   318,   321,   326,   329,   335
+     293,   300,   303,   308,   315,   318,   322,   328,   331,   337
   };
 
   void
@@ -1382,9 +1384,9 @@ namespace calc3 {
 
 #line 123 "./calc3/grammar/calc3_parser.bison.y"
 } // calc3
-#line 1386 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
+#line 1388 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
 
-#line 339 "./calc3/grammar/calc3_parser.bison.y"
+#line 341 "./calc3/grammar/calc3_parser.bison.y"
 
 // %code epilog block
 // goes at bottom of generated .cpp file after namespace and parser implementation

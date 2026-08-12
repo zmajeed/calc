@@ -20,8 +20,8 @@ Grammar
    12     | term "/" factor
 
    13 factor: atom
-   14       | "+" atom
-   15       | "-" atom
+   14       | "+" factor
+   15       | "-" factor
 
    16 atom: INT
    17     | IDENT
@@ -65,10 +65,10 @@ Nonterminals, with rules where they appear
         on right: 7 8 9 11 12
     factor <Factor> (19)
         on left: 13 14 15
-        on right: 10 11 12
+        on right: 10 11 12 14 15
     atom <Atom> (20)
         on left: 16 17 18
-        on right: 13 14 15
+        on right: 13
 
 
 State 0
@@ -111,24 +111,30 @@ State 1
 
 State 2
 
-   15 factor: "-" • atom
+   15 factor: "-" • factor
 
     "("    shift, and go to state 1
+    "-"    shift, and go to state 2
+    "+"    shift, and go to state 3
     IDENT  shift, and go to state 14
     INT    shift, and go to state 5
 
-    atom  go to state 15
+    factor  go to state 15
+    atom    go to state 12
 
 
 State 3
 
-   14 factor: "+" • atom
+   14 factor: "+" • factor
 
     "("    shift, and go to state 1
+    "-"    shift, and go to state 2
+    "+"    shift, and go to state 3
     IDENT  shift, and go to state 14
     INT    shift, and go to state 5
 
-    atom  go to state 16
+    factor  go to state 16
+    atom    go to state 12
 
 
 State 4
@@ -227,14 +233,14 @@ State 14
 
 State 15
 
-   15 factor: "-" atom •
+   15 factor: "-" factor •
 
     $default  reduce using rule 15 (factor)
 
 
 State 16
 
-   14 factor: "+" atom •
+   14 factor: "+" factor •
 
     $default  reduce using rule 14 (factor)
 

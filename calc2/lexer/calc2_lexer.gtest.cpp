@@ -105,8 +105,13 @@ TEST(Calc2Lexer, test_03) {
   destroy_at(&token);
   construct_at(&token, lexer.yylex(lexParam));
 
+  ASSERT_EQ(token.kind(), Calc2Parser::symbol_kind::S_MINUS);
+
+  destroy_at(&token);
+  construct_at(&token, lexer.yylex(lexParam));
+
   ASSERT_EQ(token.kind(), Calc2Parser::symbol_kind::S_INT);
-  EXPECT_EQ(token.value.as<int64_t>(), -3);
+  EXPECT_EQ(token.value.as<int64_t>(), 3);
 
 }
 

@@ -39,7 +39,7 @@ namespace calc3::testing {
 TEST(Calc3_Ast, test_00) {
 
 // x = 5
-  Factor factor{Atom{5}};
+  Factor factor{Atom{5}, {Factor::op::none} };
   Term term = { { factor }, {} };
   AddExpr addExpr = { { term }, {} };
   AssignExpr axp1 = addExpr;

@@ -243,6 +243,11 @@ expected<int64_t, int> Calc3::eval(EvalContext& ctx) {
 
     [](this auto&& self, const Factor& f) -> int64_t {
       auto result = self(f.atom);
+      for(const auto op: f.ops) {
+        if(op == Factor::op::minus) {
+          result = -result;
+        }
+      }
       return result;
     },
 

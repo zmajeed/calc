@@ -313,13 +313,15 @@ term:
 
 factor:
   atom {
-  $$ = {$atom, Factor::op::none};
+  $$ = { move($atom), {Factor::op::none} };
 }
-| "+" atom {
-  $$ = {$atom, Factor::op::plus};
+| "+" factor[rhs] {
+  $$ = move($rhs);
+  $$.ops.push_back(Factor::op::plus);
 }
-| "-" atom {
-  $$ = {$atom, Factor::op::minus};
+| "-" factor[rhs] {
+  $$ = move($rhs);
+  $$.ops.push_back(Factor::op::minus);
 }
 
 atom:
