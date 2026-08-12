@@ -67,7 +67,8 @@ struct Expr {
   vector<AssignExpr> assigns;
 };
 
-struct Group: Expr {
+struct Group {
+  indirect<AssignExpr> expr;
 };
 
 struct Atom: variant<Int, Ident, Group> {

@@ -677,5 +677,58 @@ a = (b = c + 5) * 2
   EXPECT_EQ(bisonParam.symtab["b"], 8);
 }
 
+TEST(Calc1_Bison, test_13) {
+
+  stringstream s("(x = 5) * 2");
+  Calc1Lexer lexer(s);
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, 10);
+  EXPECT_EQ(bisonParam.symtab["x"], 5);
+}
+
+TEST(Calc1_Bison, test_14) {
+
+  stringstream s("x = 5; (y = 3) * 2");
+  Calc1Lexer lexer(s);
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, 6);
+  EXPECT_EQ(bisonParam.symtab["x"], 5);
+  EXPECT_EQ(bisonParam.symtab["y"], 3);
+}
+
+TEST(Calc1_Bison, test_15) {
+
+  stringstream s("(x = 5; y = 3) * 2");
+  Calc1Lexer lexer(s);
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+  Calc1Parser parser([&lexer](LexParam& lexParam) -> Calc1Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_NE(parser(), 0);
+}
+
 }
 

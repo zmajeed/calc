@@ -37,7 +37,7 @@ term: factor | term "*" factor | term "/" factor
 
 factor: atom | "+" factor | "-" factor
 
-atom: INT | IDENT | "(" expr ")"
+atom: INT | IDENT | "(" assign_expr ")"
 
 
 

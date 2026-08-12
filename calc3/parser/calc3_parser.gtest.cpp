@@ -715,5 +715,61 @@ a = (b = c + 5) * 2
   EXPECT_TRUE(bisonParam.driver.symtab.contains("b"));
 }
 
+TEST(Calc3_Bison, test_13) {
+
+  stringstream s("(x = 5) * 2");
+  Calc3Lexer lexer(s);
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+  Calc3Parser parser([&lexer](LexParam& lexParam) -> Calc3Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
+  EXPECT_TRUE(bisonParam.driver.symtab.contains("x"));
+}
+
+TEST(Calc3_Bison, test_14) {
+
+  stringstream s("x = 5; (y = 3) * 2");
+  Calc3Lexer lexer(s);
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+  Calc3Parser parser([&lexer](LexParam& lexParam) -> Calc3Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 2);
+  EXPECT_TRUE(bisonParam.driver.symtab.contains("x"));
+  EXPECT_TRUE(bisonParam.driver.symtab.contains("y"));
+}
+
+TEST(Calc3_Bison, test_15) {
+
+  stringstream s("(x = 5; y = 3) * 2");
+  Calc3Lexer lexer(s);
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+  Calc3Parser parser([&lexer](LexParam& lexParam) -> Calc3Parser::symbol_type {
+    return lexer.yylex(lexParam);
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_NE(parser(), 0);
+}
+
 }
 

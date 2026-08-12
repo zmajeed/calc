@@ -943,10 +943,10 @@ namespace calc3 {
 #line 944 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 19: // atom: "(" expr ")"
+  case 19: // atom: "(" assign_expr ")"
 #line 337 "./calc3/grammar/calc3_parser.bison.y"
-               {
-  yylhs.value.as < Atom > () = Group{yystack_[1].value.as < Expr > ()};
+                      {
+  yylhs.value.as < Atom > () = Group{ indirect<AssignExpr>{move(yystack_[1].value.as < AssignExpr > ())} };
 }
 #line 952 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
@@ -1270,17 +1270,17 @@ namespace calc3 {
   }
 
 
-  const signed char Calc3Parser::yypact_ninf_ = -5;
+  const signed char Calc3Parser::yypact_ninf_ = -4;
 
   const signed char Calc3Parser::yytable_ninf_ = -1;
 
   const signed char
   Calc3Parser::yypact_[] =
   {
-      -3,    -3,     0,     0,    10,    -5,    16,    15,    -5,    12,
-       7,    -5,    -5,    17,    -5,    -5,    -5,    -3,    -5,    -3,
-       0,     0,     0,     0,    -5,    -5,    -5,     7,     7,    -5,
-      -5
+      -3,    -3,     6,     6,     1,    -4,    10,    14,    -4,     9,
+       4,    -4,    -4,    11,    -4,    -4,    -4,    -3,    -4,    -3,
+       6,     6,     6,     6,    -4,    -4,    -4,     4,     4,    -4,
+      -4
   };
 
   const signed char
@@ -1295,7 +1295,7 @@ namespace calc3 {
   const signed char
   Calc3Parser::yypgoto_[] =
   {
-      -5,    25,    -5,    -4,    -5,     2,    -2,    -5
+      -4,    -4,    -4,     5,    -4,     7,    -2,    -4
   };
 
   const signed char
@@ -1307,24 +1307,24 @@ namespace calc3 {
   const signed char
   Calc3Parser::yytable_[] =
   {
-      15,    16,     1,     2,     3,     1,     2,     3,     4,     5,
-      22,    14,     5,    25,    17,    26,    18,    23,    20,    21,
-      29,    30,    27,    28,    19,    24,    13
+      15,    16,     1,     2,     3,    17,    13,    22,     4,     5,
+      18,     1,     2,     3,    23,    20,    21,    14,     5,    24,
+      29,    30,    25,    19,    26,     0,     0,    27,    28
   };
 
   const signed char
   Calc3Parser::yycheck_[] =
   {
-       2,     3,     5,     6,     7,     5,     6,     7,    11,    12,
-       3,    11,    12,    17,     4,    19,     0,    10,     6,     7,
-      22,    23,    20,    21,     9,     8,     1
+       2,     3,     5,     6,     7,     4,     1,     3,    11,    12,
+       0,     5,     6,     7,    10,     6,     7,    11,    12,     8,
+      22,    23,    17,     9,    19,    -1,    -1,    20,    21
   };
 
   const signed char
   Calc3Parser::yystos_[] =
   {
        0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
-      18,    19,    20,    14,    11,    19,    19,     4,     0,     9,
+      18,    19,    20,    16,    11,    19,    19,     4,     0,     9,
        6,     7,     3,    10,     8,    16,    16,    18,    18,    19,
       19
   };

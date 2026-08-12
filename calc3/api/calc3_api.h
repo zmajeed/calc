@@ -187,12 +187,7 @@ expected<int64_t, int> Calc3::eval(EvalContext& ctx) {
     },
 
     [](this auto&& self, const Group& g) -> int64_t {
-      int64_t result = 0;
-      for(int i = 0; i < ssize(g.assigns); ++i) {
-        auto& ass = g.assigns[i];
-        result = self(ass);
-      }
-      return result;
+      return self(*g.expr);
     },
 
     [](this auto&& self, const AssignExpr& a) -> int64_t {
