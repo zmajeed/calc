@@ -118,7 +118,7 @@ using symbol_type = Calc1Parser::symbol_type;
  /* only c-style comments starting at second column allowed inside rules section */
  /* first flex rule starts at beginning of line */
 
-[+-]?[0-9]+ {
+[0-9]+ {
   loc.columns(yyleng);
   int64_t val;
 // flex doesn't understand preprocessor #ifdef, move brace for if-block out of #ifdef to avoid unbalanced braces and prevent flex error eof encountered inside action

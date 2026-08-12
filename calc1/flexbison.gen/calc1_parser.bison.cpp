@@ -794,17 +794,17 @@ namespace calc1 {
 #line 795 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
-  case 15: // factor: "+" atom
+  case 15: // factor: "+" factor
 #line 311 "./calc1/grammar/calc1_parser.bison.y"
-           {
+                  {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
 }
 #line 803 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
-  case 16: // factor: "-" atom
+  case 16: // factor: "-" factor
 #line 314 "./calc1/grammar/calc1_parser.bison.y"
-           {
+                  {
   yylhs.value.as < int64_t > () = -1 * yystack_[0].value.as < int64_t > ();
 }
 #line 811 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
@@ -1156,17 +1156,17 @@ namespace calc1 {
   }
 
 
-  const signed char Calc1Parser::yypact_ninf_ = -6;
+  const signed char Calc1Parser::yypact_ninf_ = -5;
 
   const signed char Calc1Parser::yytable_ninf_ = -1;
 
   const signed char
   Calc1Parser::yypact_[] =
   {
-      -5,    -5,     3,     3,    12,    -6,    20,    14,    -6,     6,
-       8,    -6,    -6,    21,    -6,    -6,    -6,    -5,    -6,    -5,
-      -2,    -2,    -2,    -2,    -6,    -6,    -6,     8,     8,    -6,
-      -6
+      -3,    -3,     0,     0,    10,    -5,    16,    15,    -5,    12,
+       7,    -5,    -5,    17,    -5,    -5,    -5,    -3,    -5,    -3,
+       0,     0,     0,     0,    -5,    -5,    -5,     7,     7,    -5,
+      -5
   };
 
   const signed char
@@ -1181,7 +1181,7 @@ namespace calc1 {
   const signed char
   Calc1Parser::yypgoto_[] =
   {
-      -6,    27,    -6,     0,    -6,     1,     2,    24
+      -5,    25,    -5,    -4,    -5,     2,    -2,    -5
   };
 
   const signed char
@@ -1193,24 +1193,24 @@ namespace calc1 {
   const signed char
   Calc1Parser::yytable_[] =
   {
-       1,     2,     3,     1,     2,     3,     4,     5,     1,    14,
-       5,    22,    20,    21,    14,     5,    17,    25,    23,    26,
-      18,    27,    28,    19,    29,    30,    15,    16,    13,    24
+      15,    16,     1,     2,     3,     1,     2,     3,     4,     5,
+      22,    14,     5,    25,    17,    26,    18,    23,    20,    21,
+      29,    30,    27,    28,    19,    24,    13
   };
 
   const signed char
   Calc1Parser::yycheck_[] =
   {
-       5,     6,     7,     5,     6,     7,    11,    12,     5,    11,
-      12,     3,     6,     7,    11,    12,     4,    17,    10,    19,
-       0,    20,    21,     9,    22,    23,     2,     3,     1,     8
+       2,     3,     5,     6,     7,     5,     6,     7,    11,    12,
+       3,    11,    12,    17,     4,    19,     0,    10,     6,     7,
+      22,    23,    20,    21,     9,     8,     1
   };
 
   const signed char
   Calc1Parser::yystos_[] =
   {
        0,     5,     6,     7,    11,    12,    14,    15,    16,    17,
-      18,    19,    20,    14,    11,    20,    20,     4,     0,     9,
+      18,    19,    20,    14,    11,    19,    19,     4,     0,     9,
        6,     7,     3,    10,     8,    16,    16,    18,    18,    19,
       19
   };

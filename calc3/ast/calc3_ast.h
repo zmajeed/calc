@@ -75,33 +75,32 @@ struct Atom: variant<Int, Ident, Group> {
 };
 
 struct Factor {
-  Atom atom;
   enum class op {
     none,
     plus,
     minus
-  } op = op::none;
+  };
+  Atom atom;
+  vector<op> ops;
 };
 
 struct Term {
-  vector<Factor> factors;
-
   enum class op {
     times,
     div
   };
 
+  vector<Factor> factors;
   vector<op> ops;
 };
 
 struct AddExpr {
-  vector<Term> terms;
-
   enum class op {
     plus,
     minus
   };
 
+  vector<Term> terms;
   vector<op> ops;
 };
 

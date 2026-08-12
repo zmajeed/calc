@@ -314,11 +314,11 @@ factor:
   atom {
   $$ = $atom;
 }
-| "+" atom {
-  $$ = $atom;
+| "+" factor[rhs] {
+  $$ = $rhs;
 }
-| "-" atom {
-  $$ = -1 * $atom;
+| "-" factor[rhs] {
+  $$ = -1 * $rhs;
 }
 
 atom:

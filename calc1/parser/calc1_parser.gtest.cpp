@@ -124,6 +124,120 @@ TEST(Calc1_BisonNoFlex, test_03) {
   BisonParam bisonParam;
   LexParam lexParam;
 
+// 3-5
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+  }};
+
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc1Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, -2);
+}
+
+TEST(Calc1_BisonNoFlex, test_04) {
+
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+// 3--5
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+  }};
+
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc1Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, 8);
+}
+
+TEST(Calc1_BisonNoFlex, test_05) {
+
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+// 3---5
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+  }};
+
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc1Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, -2);
+}
+
+TEST(Calc1_BisonNoFlex, test_06) {
+
+  BisonParam bisonParam;
+  LexParam lexParam;
+
+// 3--+-5
+  queue<Calc1Parser::symbol_type> tokens{{
+    Calc1Parser::make_INT(3, location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_PLUS(location{}),
+    Calc1Parser::make_MINUS(location{}),
+    Calc1Parser::make_INT(5, location{}),
+  }};
+
+  Calc1Parser parser([&tokens](LexParam&) -> Calc1Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc1Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.expr, -2);
+}
+
+TEST(Calc1_BisonNoFlex, test_07) {
+
+  BisonParam bisonParam;
+  LexParam lexParam;
+
 // 3 + x * 7
   queue<Calc1Parser::symbol_type> tokens{{
     Calc1Parser::make_INT(3, location{}),
@@ -148,7 +262,7 @@ TEST(Calc1_BisonNoFlex, test_03) {
   EXPECT_EQ(bisonParam.expr, 3);
 }
 
-TEST(Calc1_BisonNoFlex, test_04) {
+TEST(Calc1_BisonNoFlex, test_08) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -175,7 +289,7 @@ TEST(Calc1_BisonNoFlex, test_04) {
   EXPECT_EQ(bisonParam.expr, 7);
 }
 
-TEST(Calc1_BisonNoFlex, test_05) {
+TEST(Calc1_BisonNoFlex, test_09) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -205,7 +319,7 @@ TEST(Calc1_BisonNoFlex, test_05) {
   EXPECT_EQ(bisonParam.symtab["x"], 8);
 }
 
-TEST(Calc1_BisonNoFlex, test_06) {
+TEST(Calc1_BisonNoFlex, test_10) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -236,7 +350,7 @@ TEST(Calc1_BisonNoFlex, test_06) {
   EXPECT_EQ(bisonParam.symtab["y"], 7);
 }
 
-TEST(Calc1_BisonNoFlex, test_07) {
+TEST(Calc1_BisonNoFlex, test_11) {
 
   BisonParam bisonParam;
   LexParam lexParam;
@@ -271,7 +385,7 @@ TEST(Calc1_BisonNoFlex, test_07) {
   EXPECT_EQ(bisonParam.symtab["y"], 12);
 }
 
-TEST(Calc1_BisonNoFlex, test_08) {
+TEST(Calc1_BisonNoFlex, test_12) {
 
   BisonParam bisonParam;
   LexParam lexParam;

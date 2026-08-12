@@ -131,6 +131,124 @@ TEST(Calc3_BisonNoFlex, test_03) {
   BisonParam bisonParam{driver};
   LexParam lexParam;
 
+// 3-5
+  queue<Calc3Parser::symbol_type> tokens{{
+    Calc3Parser::make_INT(3, location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_INT(5, location{}),
+  }};
+
+  Calc3Parser parser([&tokens](LexParam&) -> Calc3Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc3Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
+}
+
+TEST(Calc3_BisonNoFlex, test_04) {
+
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+// 3--5
+  queue<Calc3Parser::symbol_type> tokens{{
+    Calc3Parser::make_INT(3, location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_INT(5, location{}),
+  }};
+
+  Calc3Parser parser([&tokens](LexParam&) -> Calc3Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc3Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
+}
+
+TEST(Calc3_BisonNoFlex, test_05) {
+
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+// 3---5
+  queue<Calc3Parser::symbol_type> tokens{{
+    Calc3Parser::make_INT(3, location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_INT(5, location{}),
+  }};
+
+  Calc3Parser parser([&tokens](LexParam&) -> Calc3Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc3Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
+}
+
+TEST(Calc3_BisonNoFlex, test_06) {
+
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
+// 3--+-5
+  queue<Calc3Parser::symbol_type> tokens{{
+    Calc3Parser::make_INT(3, location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_PLUS(location{}),
+    Calc3Parser::make_MINUS(location{}),
+    Calc3Parser::make_INT(5, location{}),
+  }};
+
+  Calc3Parser parser([&tokens](LexParam&) -> Calc3Parser::symbol_type {
+    if(tokens.empty()) {
+      return Calc3Parser::make_YYEOF(location{});
+    }
+    auto tok = tokens.front();
+    tokens.pop();
+    return tok;
+  },
+  bisonParam,
+  lexParam);
+
+  EXPECT_EQ(parser(), 0);
+  EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
+}
+
+TEST(Calc3_BisonNoFlex, test_07) {
+
+  BisonDriver driver;
+  BisonParam bisonParam{driver};
+  LexParam lexParam;
+
 // 3 + x * 7
   queue<Calc3Parser::symbol_type> tokens{{
     Calc3Parser::make_INT(3, location{}),
@@ -155,7 +273,7 @@ TEST(Calc3_BisonNoFlex, test_03) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_04) {
+TEST(Calc3_BisonNoFlex, test_08) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -183,7 +301,7 @@ TEST(Calc3_BisonNoFlex, test_04) {
   EXPECT_EQ(bisonParam.driver.expr.assigns.size(), 1);
 }
 
-TEST(Calc3_BisonNoFlex, test_05) {
+TEST(Calc3_BisonNoFlex, test_09) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -215,7 +333,7 @@ TEST(Calc3_BisonNoFlex, test_05) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("x"));
 }
 
-TEST(Calc3_BisonNoFlex, test_06) {
+TEST(Calc3_BisonNoFlex, test_10) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -248,7 +366,7 @@ TEST(Calc3_BisonNoFlex, test_06) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("y"));
 }
 
-TEST(Calc3_BisonNoFlex, test_07) {
+TEST(Calc3_BisonNoFlex, test_11) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
@@ -285,7 +403,7 @@ TEST(Calc3_BisonNoFlex, test_07) {
   EXPECT_TRUE(bisonParam.driver.symtab.contains("y"));
 }
 
-TEST(Calc3_BisonNoFlex, test_08) {
+TEST(Calc3_BisonNoFlex, test_12) {
 
   BisonDriver driver;
   BisonParam bisonParam{driver};
