@@ -266,7 +266,7 @@ namespace calc1 {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -277,7 +277,7 @@ namespace calc1 {
         value.YY_MOVE_OR_COPY< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.YY_MOVE_OR_COPY< string > (YY_MOVE (that.value));
         break;
 
@@ -296,7 +296,7 @@ namespace calc1 {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -307,7 +307,7 @@ namespace calc1 {
         value.move< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (YY_MOVE (that.value));
         break;
 
@@ -326,7 +326,7 @@ namespace calc1 {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -337,7 +337,7 @@ namespace calc1 {
         value.copy< int64_t > (that.value);
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.copy< string > (that.value);
         break;
 
@@ -355,7 +355,7 @@ namespace calc1 {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -366,7 +366,7 @@ namespace calc1 {
         value.move< int64_t > (that.value);
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (that.value);
         break;
 
@@ -649,7 +649,7 @@ namespace calc1 {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -660,7 +660,7 @@ namespace calc1 {
         yylhs.value.emplace< int64_t > ();
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         yylhs.value.emplace< string > ();
         break;
 
@@ -718,7 +718,7 @@ namespace calc1 {
 #line 719 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
-  case 6: // assign_expr: IDENT "=" assign_expr
+  case 6: // assign_expr: "ident" "=" assign_expr
 #line 274 "./calc1/grammar/calc1_parser.bison.y"
                              {
   if(!bisonParam.symtab.contains(yystack_[2].value.as < string > ())) {
@@ -810,7 +810,7 @@ namespace calc1 {
 #line 811 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
-  case 17: // atom: INT
+  case 17: // atom: "int"
 #line 319 "./calc1/grammar/calc1_parser.bison.y"
       {
   yylhs.value.as < int64_t > () = yystack_[0].value.as < int64_t > ();
@@ -818,7 +818,7 @@ namespace calc1 {
 #line 819 "./calc1/flexbison.gen/calc1_parser.bison.cpp"
     break;
 
-  case 18: // atom: IDENT
+  case 18: // atom: "ident"
 #line 322 "./calc1/grammar/calc1_parser.bison.y"
         {
   if(!bisonParam.symtab.contains(yystack_[0].value.as < string > ())) {
@@ -1022,7 +1022,7 @@ namespace calc1 {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "/", "=", "(", "-", "+", ")",
-  ";", "*", "IDENT", "INT", "$accept", "expr", "assign_exprs",
+  ";", "*", "ident", "int", "$accept", "expr", "assign_exprs",
   "assign_expr", "add_expr", "term", "factor", "atom", YY_NULLPTR
     };
     return yy_sname[yysymbol];

@@ -234,8 +234,8 @@ void calc1::Calc1Parser::error(const location& loc, const string& msg) {
 %token SEMICOLON            ";"
 %token TIMES                "*"
 
-%token <string>             IDENT
-%token <int64_t>            INT
+%token <string>             IDENT        "ident"
+%token <int64_t>            INT          "int"
 
 %nterm <int64_t>            add_expr
 %nterm <int64_t>            assign_expr

@@ -289,11 +289,11 @@ namespace calc3 {
         value.YY_MOVE_OR_COPY< Term > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.YY_MOVE_OR_COPY< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.YY_MOVE_OR_COPY< string > (YY_MOVE (that.value));
         break;
 
@@ -340,11 +340,11 @@ namespace calc3 {
         value.move< Term > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.move< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (YY_MOVE (that.value));
         break;
 
@@ -391,11 +391,11 @@ namespace calc3 {
         value.copy< Term > (that.value);
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.copy< int64_t > (that.value);
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.copy< string > (that.value);
         break;
 
@@ -441,11 +441,11 @@ namespace calc3 {
         value.move< Term > (that.value);
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.move< int64_t > (that.value);
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (that.value);
         break;
 
@@ -756,11 +756,11 @@ namespace calc3 {
         yylhs.value.emplace< Term > ();
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         yylhs.value.emplace< int64_t > ();
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         yylhs.value.emplace< string > ();
         break;
 
@@ -823,7 +823,7 @@ namespace calc3 {
 #line 824 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 6: // assign_expr: IDENT "=" assign_expr
+  case 6: // assign_expr: "ident" "=" assign_expr
 #line 274 "./calc3/grammar/calc3_parser.bison.y"
                              {
   if(!bisonParam.driver.symtab.contains(yystack_[2].value.as < string > ())) {
@@ -924,7 +924,7 @@ namespace calc3 {
 #line 925 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 17: // atom: INT
+  case 17: // atom: "int"
 #line 328 "./calc3/grammar/calc3_parser.bison.y"
       {
   yylhs.value.as < Atom > () = yystack_[0].value.as < int64_t > ();
@@ -932,7 +932,7 @@ namespace calc3 {
 #line 933 "./calc3/flexbison.gen/calc3_parser.bison.cpp"
     break;
 
-  case 18: // atom: IDENT
+  case 18: // atom: "ident"
 #line 331 "./calc3/grammar/calc3_parser.bison.y"
         {
   if(!bisonParam.driver.symtab.contains(yystack_[0].value.as < string > ())) {
@@ -1136,7 +1136,7 @@ namespace calc3 {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "/", "=", "(", "-", "+", ")",
-  ";", "*", "IDENT", "INT", "$accept", "expr", "assign_exprs",
+  ";", "*", "ident", "int", "$accept", "expr", "assign_exprs",
   "assign_expr", "add_expr", "term", "factor", "atom", YY_NULLPTR
     };
     return yy_sname[yysymbol];

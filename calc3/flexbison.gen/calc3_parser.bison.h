@@ -484,10 +484,10 @@ namespace calc3 {
       // term
       char dummy6[sizeof (Term)];
 
-      // INT
+      // "int"
       char dummy7[sizeof (int64_t)];
 
-      // IDENT
+      // "ident"
       char dummy8[sizeof (string)];
 
       // assign_exprs
@@ -552,8 +552,8 @@ namespace calc3 {
     RIGHT_PAREN = 8,               // ")"
     SEMICOLON = 9,                 // ";"
     TIMES = 10,                    // "*"
-    IDENT = 11,                    // IDENT
-    INT = 12                       // INT
+    IDENT = 11,                    // "ident"
+    INT = 12                       // "int"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -583,8 +583,8 @@ namespace calc3 {
         S_RIGHT_PAREN = 8,                       // ")"
         S_SEMICOLON = 9,                         // ";"
         S_TIMES = 10,                            // "*"
-        S_IDENT = 11,                            // IDENT
-        S_INT = 12,                              // INT
+        S_IDENT = 11,                            // "ident"
+        S_INT = 12,                              // "int"
         S_YYACCEPT = 13,                         // $accept
         S_expr = 14,                             // expr
         S_assign_exprs = 15,                     // assign_exprs
@@ -653,11 +653,11 @@ namespace calc3 {
         value.move< Term > (std::move (that.value));
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.move< int64_t > (std::move (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (std::move (that.value));
         break;
 
@@ -862,11 +862,11 @@ switch (yykind)
         value.template destroy< Term > ();
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.template destroy< int64_t > ();
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.template destroy< string > ();
         break;
 
@@ -1620,11 +1620,11 @@ switch (yykind)
         value.copy< Term > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.copy< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.copy< string > (YY_MOVE (that.value));
         break;
 
@@ -1687,11 +1687,11 @@ switch (yykind)
         value.move< Term > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
         value.move< int64_t > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (YY_MOVE (s.value));
         break;
 
