@@ -18,8 +18,8 @@
 %token SEMICOLON            ";"
 %token TIMES                "*"
 
-%token                      IDENT
-%token                      INT
+%token IDENT                "ident"
+%token INT                  "int"
 
 %start expr
 

@@ -8,7 +8,7 @@ Grammar
     3 assign_exprs: assign_expr
     4             | assign_exprs ";" assign_expr
 
-    5 assign_expr: IDENT "=" assign_expr
+    5 assign_expr: "ident" "=" assign_expr
     6            | add_expr
 
     7 add_expr: term
@@ -23,8 +23,8 @@ Grammar
    14       | "+" factor
    15       | "-" factor
 
-   16 atom: INT
-   17     | IDENT
+   16 atom: "int"
+   17     | "ident"
    18     | "(" assign_expr ")"
 
 
@@ -40,8 +40,8 @@ Terminals, with rules where they appear
     ")" (263) 18
     ";" (264) 2 4
     "*" (265) 11
-    IDENT <string> (266) 5 17
-    INT <int64_t> (267) 16
+    "ident" <string> (266) 5 17
+    "int" <int64_t> (267) 16
 
 
 Nonterminals, with rules where they appear
@@ -75,11 +75,11 @@ State 0
 
     0 $accept: • expr $end
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 4
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 4
+    "int"    shift, and go to state 5
 
     expr          go to state 6
     assign_exprs  go to state 7
@@ -94,11 +94,11 @@ State 1
 
    18 atom: "(" • assign_expr ")"
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 4
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 4
+    "int"    shift, and go to state 5
 
     assign_expr  go to state 13
     add_expr     go to state 9
@@ -111,11 +111,11 @@ State 2
 
    15 factor: "-" • factor
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     factor  go to state 15
     atom    go to state 12
@@ -125,11 +125,11 @@ State 3
 
    14 factor: "+" • factor
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     factor  go to state 16
     atom    go to state 12
@@ -137,8 +137,8 @@ State 3
 
 State 4
 
-    5 assign_expr: IDENT • "=" assign_expr
-   17 atom: IDENT •  [$end, "/", "-", "+", ")", ";", "*"]
+    5 assign_expr: "ident" • "=" assign_expr
+   17 atom: "ident" •  [$end, "/", "-", "+", ")", ";", "*"]
 
     "="  shift, and go to state 17
 
@@ -147,7 +147,7 @@ State 4
 
 State 5
 
-   16 atom: INT •
+   16 atom: "int" •
 
     $default  reduce using rule 16 (atom)
 
@@ -224,7 +224,7 @@ State 13
 
 State 14
 
-   17 atom: IDENT •
+   17 atom: "ident" •
 
     $default  reduce using rule 17 (atom)
 
@@ -245,13 +245,13 @@ State 16
 
 State 17
 
-    5 assign_expr: IDENT "=" • assign_expr
+    5 assign_expr: "ident" "=" • assign_expr
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 4
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 4
+    "int"    shift, and go to state 5
 
     assign_expr  go to state 25
     add_expr     go to state 9
@@ -272,11 +272,11 @@ State 19
     2 expr: assign_exprs ";" •  [$end]
     4 assign_exprs: assign_exprs ";" • assign_expr
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 4
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 4
+    "int"    shift, and go to state 5
 
     $default  reduce using rule 2 (expr)
 
@@ -291,11 +291,11 @@ State 20
 
     9 add_expr: add_expr "-" • term
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     term    go to state 27
     factor  go to state 11
@@ -306,11 +306,11 @@ State 21
 
     8 add_expr: add_expr "+" • term
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     term    go to state 28
     factor  go to state 11
@@ -321,11 +321,11 @@ State 22
 
    12 term: term "/" • factor
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     factor  go to state 29
     atom    go to state 12
@@ -335,11 +335,11 @@ State 23
 
    11 term: term "*" • factor
 
-    "("    shift, and go to state 1
-    "-"    shift, and go to state 2
-    "+"    shift, and go to state 3
-    IDENT  shift, and go to state 14
-    INT    shift, and go to state 5
+    "("      shift, and go to state 1
+    "-"      shift, and go to state 2
+    "+"      shift, and go to state 3
+    "ident"  shift, and go to state 14
+    "int"    shift, and go to state 5
 
     factor  go to state 30
     atom    go to state 12
@@ -354,7 +354,7 @@ State 24
 
 State 25
 
-    5 assign_expr: IDENT "=" assign_expr •
+    5 assign_expr: "ident" "=" assign_expr •
 
     $default  reduce using rule 5 (assign_expr)
 

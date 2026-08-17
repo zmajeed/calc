@@ -473,7 +473,7 @@ namespace calc2 {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // INT
+      // "int"
       // expr
       // assign_exprs
       // assign_expr
@@ -483,7 +483,7 @@ namespace calc2 {
       // atom
       char dummy1[sizeof (int64_t)];
 
-      // IDENT
+      // "ident"
       char dummy2[sizeof (string)];
     };
 
@@ -545,8 +545,8 @@ namespace calc2 {
     RIGHT_PAREN = 8,               // ")"
     SEMICOLON = 9,                 // ";"
     TIMES = 10,                    // "*"
-    IDENT = 11,                    // IDENT
-    INT = 12                       // INT
+    IDENT = 11,                    // "ident"
+    INT = 12                       // "int"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -576,8 +576,8 @@ namespace calc2 {
         S_RIGHT_PAREN = 8,                       // ")"
         S_SEMICOLON = 9,                         // ";"
         S_TIMES = 10,                            // "*"
-        S_IDENT = 11,                            // IDENT
-        S_INT = 12,                              // INT
+        S_IDENT = 11,                            // "ident"
+        S_INT = 12,                              // "int"
         S_YYACCEPT = 13,                         // $accept
         S_expr = 14,                             // expr
         S_assign_exprs = 15,                     // assign_exprs
@@ -622,7 +622,7 @@ namespace calc2 {
       {
         switch (this->kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -633,7 +633,7 @@ namespace calc2 {
         value.move< int64_t > (std::move (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (std::move (that.value));
         break;
 
@@ -712,7 +712,7 @@ namespace calc2 {
         // Value type destructor.
 switch (yykind)
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -723,7 +723,7 @@ switch (yykind)
         value.template destroy< int64_t > ();
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.template destroy< string > ();
         break;
 
@@ -1449,7 +1449,7 @@ switch (yykind)
   {
     switch (this->kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -1460,7 +1460,7 @@ switch (yykind)
         value.copy< int64_t > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.copy< string > (YY_MOVE (that.value));
         break;
 
@@ -1495,7 +1495,7 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
-      case symbol_kind::S_INT: // INT
+      case symbol_kind::S_INT: // "int"
       case symbol_kind::S_expr: // expr
       case symbol_kind::S_assign_exprs: // assign_exprs
       case symbol_kind::S_assign_expr: // assign_expr
@@ -1506,7 +1506,7 @@ switch (yykind)
         value.move< int64_t > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_IDENT: // IDENT
+      case symbol_kind::S_IDENT: // "ident"
         value.move< string > (YY_MOVE (s.value));
         break;
 

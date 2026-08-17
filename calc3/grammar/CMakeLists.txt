@@ -23,19 +23,6 @@ add_flex_bison_dependency(flex_files bison_files)
 
 add_library(flexbisonlib.calc3 STATIC ${FLEX_flex_files_OUTPUTS} ${BISON_bison_files_OUTPUT_SOURCE})
 
-target_compile_definitions(flexbisonlib.calc3 PRIVATE $<$<PLATFORM_ID:CYGWIN>: GTEST_HAS_PTHREAD=1 _POSIX_C_SOURCE=200809L _GNU_SOURCE>)
-
-target_compile_options(flexbisonlib.calc3 PRIVATE
-  $<$<CXX_COMPILER_ID:GNU>: -std=c++26 -Wall -Werror -Wextra -pthread -fconcepts-diagnostics-depth=10>
-  $<$<CXX_COMPILER_ID:Clang>: -Wall -Werror -Wextra -std=c++26 -pthread -Wno-unqualified-std-cast-call>
-)
-target_compile_options(flexbisonlib.calc3 PRIVATE
-  $<$<AND:$<CONFIG:debug>,$<CXX_COMPILER_ID:GNU>>: -O0 -ggdb3>
-  $<$<AND:$<CONFIG:release>,$<CXX_COMPILER_ID:GNU>>: -Og>
-  $<$<AND:$<CONFIG:debug>,$<CXX_COMPILER_ID:Clang>>: -O0 -ggdb3>
-  $<$<AND:$<CONFIG:release>,$<CXX_COMPILER_ID:Clang>>: -Og>
-)
-
 target_include_directories(flexbisonlib.calc3 PUBLIC ${CMAKE_SOURCE_DIR}/calc3 ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(flexbisonlib.calc3 PUBLIC
   $<$<PLATFORM_ID:Darwin>: ${FLEX_INCLUDE_DIRS}>
